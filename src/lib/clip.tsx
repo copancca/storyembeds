@@ -8,9 +8,20 @@ export function copyThreadHTML(
   navigator.clipboard
     .writeText(htmlContent)
     .then(() => {
-      alert("HTML copied to clipboard!");
+      alert("html copied to clipboard!");
     })
     .catch((err) => {
-      alert("Failed to copy: " + err);
+      alert("failed to copy: " + err);
+    });
+}
+
+export function copyText(text: string, description?: string) {
+  navigator.clipboard
+    .writeText(text)
+    .then(() => {
+      alert((description ? description : "text") + " copied to clipboard");
+    })
+    .catch((err) => {
+      alert("failed to copy: " + err);
     });
 }

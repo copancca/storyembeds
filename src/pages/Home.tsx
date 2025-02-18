@@ -3,6 +3,7 @@ import { useConfigStore } from "../store/useConfigStore";
 import Nav from "../components/Nav";
 import "./Home.css";
 import "../layouts/AO3.css";
+import { copyText } from "../lib/clip";
 import demoHtml from "../assets/demo.html?raw";
 
 const CSS_FILES: { [key: string]: string } = {
@@ -40,6 +41,7 @@ const Home: React.FC = () => {
   }, []);
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
   const [concatenatedCSS, setConcatenatedCSS] = useState<string>("");
+  const [copied, setCopied] = useState<boolean>(false);
   const { workskin, toggleWorkSkin } = useConfigStore();
 
   const handleCheckboxChange = (file: string) => {
@@ -65,7 +67,8 @@ const Home: React.FC = () => {
         }
       })
     );
-    setConcatenatedCSS(fetchedCSS.join("\n\n"));
+    setConcatenatedCSS(fetchedCSS.join("\n"));
+    setCopied(false);
   };
 
   return (
@@ -102,7 +105,20 @@ const Home: React.FC = () => {
           placeholder="css output"
           readOnly
           value={concatenatedCSS}
+          onClick={() => {
+            if (concatenatedCSS && !copied) {
+              copyText(concatenatedCSS, "generated css");
+              setCopied(true);
+            }
+          }}
         ></textarea>
+        <p>
+          {concatenatedCSS
+            ? copied
+              ? "copied!"
+              : "click the text box to copy the generated css"
+            : "no css generated yet"}
+        </p>
         <hr />
         <h2 className="sb-header">demo</h2>
         <p className="workskin-status">
