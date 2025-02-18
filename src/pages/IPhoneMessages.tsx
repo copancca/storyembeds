@@ -214,7 +214,7 @@ const IPhoneMessages: React.FC = () => {
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "/styles/IPhoneMessages.css";
+    link.href = import.meta.env.BASE_URL + "styles/IPhoneMessages.css";
     document.head.appendChild(link);
 
     return () => {

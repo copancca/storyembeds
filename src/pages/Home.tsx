@@ -6,9 +6,9 @@ import "../layouts/AO3.css";
 import demoHtml from "../assets/demo.html?raw";
 
 const CSS_FILES: { [key: string]: string } = {
-  twitter: "/styles/Twitter.css",
-  "iphone messages": "/styles/IPhoneMessages.css",
-  instagram: "/styles/InstagramDM.css",
+  twitter: "styles/Twitter.css",
+  "iphone messages": "styles/IPhoneMessages.css",
+  instagram: "styles/InstagramDM.css",
   news: "styles/News.css",
 };
 
@@ -16,19 +16,19 @@ const Home: React.FC = () => {
   useEffect(() => {
     const insta = document.createElement("link");
     insta.rel = "stylesheet";
-    insta.href = "/styles/InstagramDM.css";
+    insta.href = import.meta.env.BASE_URL + "styles/InstagramDM.css";
     document.head.appendChild(insta);
     const iphone = document.createElement("link");
     iphone.rel = "stylesheet";
-    iphone.href = "/styles/IPhoneMessages.css";
+    iphone.href = import.meta.env.BASE_URL + "styles/IPhoneMessages.css";
     document.head.appendChild(iphone);
     const twitter = document.createElement("link");
     twitter.rel = "stylesheet";
-    twitter.href = "/styles/Twitter.css";
+    twitter.href = import.meta.env.BASE_URL + "styles/Twitter.css";
     document.head.appendChild(twitter);
     const news = document.createElement("link");
     news.rel = "stylesheet";
-    news.href = "/styles/News.css";
+    news.href = import.meta.env.BASE_URL + "styles/News.css";
     document.head.appendChild(news);
 
     return () => {
@@ -52,7 +52,9 @@ const Home: React.FC = () => {
     const fetchedCSS = await Promise.all(
       selectedFiles.map(async (file) => {
         try {
-          const response = await fetch(CSS_FILES[file]);
+          const response = await fetch(
+            import.meta.env.BASE_URL + CSS_FILES[file]
+          );
           if (!response.ok) {
             return `/* Failed to load ${file} (HTTP ${response.status}) */\n`;
           }

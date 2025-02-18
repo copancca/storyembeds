@@ -194,7 +194,7 @@ const InstagramDM: React.FC = () => {
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "/styles/InstagramDM.css";
+    link.href = import.meta.env.BASE_URL + "styles/InstagramDM.css";
     document.head.appendChild(link);
 
     return () => {

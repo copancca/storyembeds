@@ -261,7 +261,7 @@ const Twitter: React.FC = () => {
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "/styles/Twitter.css";
+    link.href = import.meta.env.BASE_URL + "styles/Twitter.css";
     document.head.appendChild(link);
 
     return () => {
