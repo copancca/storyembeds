@@ -82,6 +82,7 @@
   font-family: 'SF Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
   font-size: 0.85em;
   font-weight: 600;
+  color: #1d1d1f;
   margin: 0;
   padding: 0;
   text-align: center;
@@ -296,7 +297,7 @@
 }
 
 #workskin .phone .you {
-  color: #000;
+  color: #1d1d1f;
   background-color: #e5e5ea;
   float: left;
   max-width: 238px;
@@ -309,6 +310,10 @@
   padding: 0.5em 0.4em 0;
   font-size: 0.75em;
   font-weight: 600;
+}
+
+#workskin .phone .body p.timestamp:first-child {
+  margin-top: 0;
 }
 
 #workskin .phone .body p+p:has(>.tapback) {
