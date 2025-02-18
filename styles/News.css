@@ -4,7 +4,7 @@
   font-size: 0.857em;
   text-align: justify;
   text-justify: inter-word;
-  max-width: 90%;
+  max-width: 85%;
   margin: 1.25em auto;
   background-color: #f9f9f9;
   color: #2a2a2a;
@@ -20,9 +20,15 @@
 #workskin pre.fakenews {
   padding: 2.5em;
   line-height: 1.5;
-  font-family: 'Monaco', 'Consolas', Courier, monospace;
+  white-space: pre;
+  overflow-x: auto;
 }
 
 #workskin .fakenews.times {
   font-family: Georgia, "Times New Roman", Times, "Droid Serif", serif;
+}
+
+#workskin .fakenews.mono,
+#workskin pre.fakenews {
+  font-family: 'Monaco', 'Consolas', Courier, monospace;
 }
