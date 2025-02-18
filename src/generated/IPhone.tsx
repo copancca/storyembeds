@@ -82,9 +82,7 @@ export const PhoneMessages: React.FC<PhoneProps> = ({
             <React.Fragment key={i}>
               {(i > 0 && longSince(msg, phone.messages[i - 1])) ||
               (i == 0 && msg.sent) ? (
-                <p className="timestamp">
-                  {formatIOSTimestamp(phone.now, msg.sent)}
-                </p>
+                <p className="timestamp">{formatIOSTimestamp(now, msg.sent)}</p>
               ) : null}
               <p
                 className={
