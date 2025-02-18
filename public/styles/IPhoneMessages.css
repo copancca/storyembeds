@@ -1,0 +1,373 @@
+#workskin .phone {
+  width: 360px;
+  margin: 0 auto 2em;
+  font-size: 0.95em;
+  font-family: 'SF Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  line-height: 1.11;
+  font-kerning: normal;
+}
+
+#workskin .phone .header {
+  background-color: #f2f3f7;
+  height: 70px;
+  width: 100%;
+}
+
+#workskin .phone .header .profile {
+  margin: 6px auto 0;
+  width: 150px;
+  padding-top: 6px;
+  text-align: center;
+}
+
+#workskin .phone .header .profile .pfp {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 5px;
+  padding: 0;
+  background: linear-gradient(#a3a9b6, #747985);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+#workskin .phone .header .profile .pfp img {
+  width: 36px;
+  height: 36px;
+}
+
+#workskin .phone .header .profile p.pfp:not(:has(> img)) {
+  border: 2px solid transparent;
+  border-top-color: #a3a9b6;
+  border-bottom-color: #747985;
+  user-select: none;
+}
+
+#workskin .phone .header .profile .pfp span {
+  color: #ffffff;
+  display: block;
+  font-size: 24px;
+  padding-top: 2px;
+  font-weight: 500;
+  font-family: 'SF Pro Rounded', ui-rounded, 'SF Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+}
+
+#workskin .phone .header .profile .pfp .nopfp {
+  display: block;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: #fff;
+  position: absolute;
+  bottom: -29px;
+  left: -4px;
+  box-sizing: border-box;
+}
+
+#workskin .phone .header .profile .pfp .nopfp::after {
+  display: block;
+  content: "";
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background-color: #fff;
+  position: absolute;
+  bottom: 42px;
+  left: 12px;
+}
+
+#workskin .phone .header .profile .name {
+  font-family: 'SF Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  font-size: 0.85em;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  position: relative;
+  box-sizing: border-box;
+}
+
+#workskin .phone .header .profile .name::after {
+  content: " ›";
+  color: #999;
+  padding-left: 0.2em;
+  display: inline-block;
+}
+
+#workskin .phone .back {
+  float: left;
+  margin-top: 15px;
+  margin-left: 11px;
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: 22px;
+  height: 22px;
+  border: 2px solid transparent;
+  border-radius: 100px;
+}
+
+#workskin .phone .back::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-bottom: 2px solid #1289fe;
+  border-left: 2px solid #1289fe;
+  transform: rotate(45deg);
+  left: 6px;
+  top: 4px;
+}
+
+#workskin .phone .facetime {
+  float: right;
+  margin-top: 22px;
+  margin-right: 27px;
+  position: relative;
+}
+
+#workskin .phone .facetime .cambod {
+  width: 15px;
+  height: 13px;
+  border-radius: 5px;
+  background-color: #f2f3f7;
+  border: 2px solid #1289fe;
+  position: relative;
+  top: -4px;
+  z-index: 10;
+}
+
+#workskin .phone .facetime .camlens {
+  position: absolute;
+  width: 17px;
+  height: 8px;
+  border-left: 1px solid transparent;
+  border-bottom: 2px solid #1289fe;
+}
+
+#workskin .phone .facetime .camlens,
+#workskin .phone .facetime .camlens::before {
+  display: block;
+  box-sizing: border-box;
+  border-right: 2px solid transparent;
+  transform: rotate(-90deg);
+  top: 0px;
+  right: -12px;
+}
+
+#workskin .phone .facetime .camlens::before {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-left: 2px solid #1289fe;
+  border-top: 2px solid #1289fe;
+  border-bottom: 2px solid transparent;
+  transform: rotate(45deg) skew(10deg, 10deg);
+  left: 0px;
+}
+
+#workskin .phone .body {
+  background: #ffffff;
+  padding-bottom: 1em;
+}
+
+#workskin .phone .body hr {
+  display: none;
+}
+
+#workskin .phone .body .clear {
+  clear: both;
+}
+
+#workskin .phone .body p {
+  margin: 1em 1em 0;
+  font-weight: 500;
+  padding: 0.5em 0.75em;
+  border-radius: 0.95em;
+  position: relative;
+  clear: both;
+  box-sizing: border-box;
+}
+
+#workskin .phone .body p.emoji {
+  font-size: 3em;
+  background-color: transparent;
+  margin: 0;
+  padding: 0.15em 0.35em;
+}
+
+#workskin .phone .body p.emoji::after {
+  border: 0 none !important;
+}
+
+#workskin .phone .body p .tapback {
+  display: block;
+  height: 2em;
+  width: 2em;
+  border-radius: 50%;
+  position: absolute;
+  top: -1.25em;
+  box-sizing: border-box;
+  border: 0.5em solid transparent;
+  z-index: 1;
+}
+
+#workskin .phone .desc {
+  display: none;
+}
+
+#workskin .phone .body p .tapback::before {
+  content: "";
+  display: block;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -0.75em;
+  z-index: -1;
+}
+
+#workskin .phone .body p .tapback::after {
+  content: "";
+  display: block;
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -1.15em;
+}
+
+#workskin .phone .body p.me .tapback {
+  left: -1.25em;
+  background-color: #e5e5ea;
+}
+
+#workskin .phone .body p.me .tapback::before {
+  background-color: #e5e5ea;
+  left: -0.6em;
+}
+
+#workskin .phone .body p.me .tapback::after {
+  background-color: #e5e5ea;
+  left: -1.0em;
+}
+
+#workskin .phone .body p.you .tapback {
+  right: -1.25em;
+  background-color: #1289fe;
+}
+
+#workskin .phone .body p.you .tapback::before {
+  background-color: #1289fe;
+  right: -0.6em;
+}
+
+#workskin .phone .body p.you .tapback::after {
+  background-color: #1289fe;
+  right: -1.0em;
+}
+
+#workskin .phone .green.body p.you .tapback {
+  background-color: #34c759;
+}
+
+#workskin .phone .green.body p.you .tapback::before {
+  background-color: #34c759;
+}
+
+#workskin .phone .green.body p.you .tapback::after {
+  background-color: #34c759;
+}
+
+#workskin .phone .me {
+  color: #fff;
+  background-color: #1289fe;
+  float: right;
+  max-width: 231px;
+}
+
+#workskin .phone .green .me {
+  background-color: #34c759;
+}
+
+#workskin .phone .you {
+  color: #000;
+  background-color: #e5e5ea;
+  float: left;
+  max-width: 238px;
+}
+
+#workskin .phone .body p.timestamp {
+  text-align: center;
+  color: #8e8e93;
+  margin: 0.5em 1em 0;
+  padding: 0.5em 0.4em 0;
+  font-size: 0.75em;
+  font-weight: 600;
+}
+
+#workskin .phone .body p+p:has(>.tapback) {
+  margin-top: 1.5em !important;
+}
+
+#workskin .phone .me+.me,
+#workskin .phone .you+.you {
+  margin-top: 1px;
+}
+
+#workskin .phone .me:has(+:not(.me))::after,
+#workskin .phone .me:has(+p > .tapback)::after,
+#workskin .phone .me:has(+.emoji)::after,
+#workskin .phone .me:last-child::after {
+  content: "";
+  position: absolute;
+  right: -0.5em;
+  bottom: -0.1em;
+  width: 0.5em;
+  height: 1em;
+  border-left: 0.6em solid #1289fe;
+  border-bottom-left-radius: 1em 0.5em;
+}
+
+#workskin .phone .green .me:has(+:not(.me))::after,
+#workskin .phone .green .me:last-child::after {
+  border-left-color: #34c759;
+}
+
+#workskin .phone .you:has(+:not(.you))::after,
+#workskin .phone .you:has(+p > .tapback)::after,
+#workskin .phone .you:has(+.emoji)::after,
+#workskin .phone .you:last-child::after {
+  content: "";
+  position: absolute;
+  left: -0.5em;
+  bottom: -0.1em;
+  width: 0.5em;
+  height: 1em;
+  border-right: 0.6em solid #e5e5ea;
+  border-bottom-right-radius: 1em 0.5em;
+}
+
+#workskin .phone .status {
+  color: #8e8e93;
+  text-align: right;
+  margin: 0.5em 1em 0;
+  padding: 0.5em 0.4em 0;
+  font-size: 0.75em;
+  font-weight: 600;
+}
+
+#workskin .phone .status .date {
+  font-weight: normal;
+}
+
+#workskin .phone .sendbox {
+  clear: both;
+  margin: 0;
+  border: 0 none;
+}

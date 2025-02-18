@@ -1,0 +1,315 @@
+#workskin .insta {
+  width: 360px;
+  margin: 0 auto 2em;
+  font-size: 0.9375em;
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 1.3333;
+}
+
+#workskin .insta .header {
+  background-color: #ffffff;
+  height: 50px;
+  width: 100%;
+}
+
+#workskin .insta .header .profile {
+  margin: 6px 0.5em 0;
+  padding-top: 6px;
+  float: left;
+}
+
+#workskin .insta .pfp {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 auto 5px;
+  background: linear-gradient(#a3a9b6, #747985);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  border-top-color: #a3a9b6;
+  border-bottom-color: #747985;
+  padding: 0;
+}
+
+#workskin .insta .header .profile .pfp img {
+  width: 24px;
+  height: 24px;
+}
+
+#workskin .insta .body p .pfp {
+  position: absolute;
+  left: -30px;
+  top: 0.5em;
+}
+
+#workskin .insta .header .profile p.pfp:not(:has(> img)),
+#workskin .insta .body p span.pfp:not(:has(> img)) {
+  border: 2px solid transparent;
+}
+
+#workskin .insta .pfp span {
+  display: block;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: #fff;
+  position: absolute;
+  bottom: -29px;
+  left: -4px;
+  box-sizing: border-box;
+}
+
+#workskin .insta .pfp span::after {
+  display: block;
+  content: "";
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  position: absolute;
+  bottom: 42px;
+  left: 12px;
+}
+
+#workskin .insta .header .profile .name {
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 0;
+  text-align: center;
+  position: relative;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  display: inline-block;
+  margin: 0 0.5em 5px;
+  top: -12px;
+}
+
+#workskin .insta .header .profile .name::after {
+  content: " ›";
+  color: #999;
+  padding-left: 0.2em;
+  display: inline-block;
+}
+
+#workskin .insta .back {
+  float: left;
+  margin-top: 15px;
+  margin-left: 11px;
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: 22px;
+  height: 22px;
+  border: 2px solid transparent;
+  border-radius: 100px;
+}
+
+#workskin .insta .back::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-bottom: 2px solid #333333;
+  border-left: 2px solid #333333;
+  transform: rotate(45deg);
+  left: 6px;
+  top: 4px;
+}
+
+#workskin .insta .video {
+  float: right;
+  margin-top: 22px;
+  margin-right: 27px;
+  position: relative;
+}
+
+#workskin .insta .video .cambod {
+  width: 13px;
+  height: 13px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  border: 2px solid #333333;
+  position: relative;
+  top: -4px;
+  z-index: 10;
+}
+
+#workskin .insta .video .camlens {
+  position: absolute;
+  width: 11px;
+  height: 7px;
+  border-left: 1px solid transparent;
+  border-bottom: 2px solid #333333;
+}
+
+#workskin .insta .video .camlens,
+#workskin .insta .video .camlens::before {
+  display: block;
+  box-sizing: border-box;
+  border-right: 2px solid transparent;
+  transform: rotate(-90deg);
+  top: 1px;
+  right: -6px;
+}
+
+#workskin .insta .video .camlens::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-left: 2px solid #333333;
+  border-top: 2px solid #333333;
+  border-bottom: 2px solid transparent;
+  transform: rotate(45deg) skew(10deg, 10deg);
+  left: 0px;
+}
+
+#workskin .insta .body {
+  background: #ffffff;
+  padding: 0 0 1em 1em;
+}
+
+#workskin .insta .body hr {
+  display: none;
+}
+
+#workskin .insta .body .clear {
+  clear: both;
+}
+
+#workskin .insta .desc {
+  display: none;
+}
+
+#workskin .insta p {
+  margin: 1em 1em 0;
+  font-weight: 400;
+  padding: 0.5em 0.75em;
+  border-radius: 1.25em;
+  position: relative;
+  clear: both;
+  box-sizing: border-box;
+}
+
+#workskin .insta p.emoji {
+  font-size: 2em;
+  background-color: transparent;
+  background-image: none;
+  margin: 0 0 0 30px;
+  padding: 0.15em 0.35em;
+}
+
+#workskin .insta p.emoji::after {
+  border: 0 none !important;
+}
+
+#workskin .insta p.tapped {
+  margin-bottom: 1em;
+}
+
+#workskin .insta p.tapped.emoji {
+  margin-bottom: 0;
+}
+
+#workskin .insta p .tapback {
+  display: block;
+  border-radius: 1em;
+  position: absolute;
+  bottom: -1.5em;
+  background-color: #e5e5ea;
+  box-sizing: border-box;
+  border: 2px solid #fff;
+  text-align: center;
+  width: 2.5em;
+  padding-top: 0.2em;
+  font-size: 0.8em;
+}
+
+#workskin .insta p.emoji .tapback {
+  border-radius: 1em;
+  position: absolute;
+  bottom: -0.5em;
+  background-color: #e5e5ea;
+  box-sizing: border-box;
+  border: 2px solid #fff;
+  text-align: center;
+  width: 2.5em;
+  padding-top: 0.2em;
+  font-size: 0.4em;
+}
+
+#workskin .insta p.me .tapback {
+  right: 0.35em;
+}
+
+#workskin .insta p.you .tapback {
+  left: 0.35em;
+}
+
+#workskin .insta .me {
+  color: #fff;
+  background: linear-gradient(#c00ccc, #5950f9) fixed;
+  float: right;
+  max-width: 231px;
+}
+
+#workskin .insta .you {
+  color: #000;
+  background-color: #e5e5ea;
+  float: left;
+  max-width: 238px;
+  margin-left: 30px;
+}
+
+#workskin .insta p.timestamp {
+  text-align: center;
+  color: #8e8e93;
+  margin: 0 1em 0;
+  padding: 1em 0 0 0;
+  font-size: 0.75em;
+}
+
+#workskin .insta p.timestamp+p {
+  margin-top: 0.6em;
+}
+
+#workskin .insta .me:not(.tapped):not(.emoji)+.me {
+  border-top-right-radius: 0.25em;
+  margin-top: 2px;
+}
+
+#workskin .insta .you:not(.tapped):not(.emoji)+.you {
+  border-top-left-radius: 0.25em;
+  margin-top: 2px;
+}
+
+#workskin .insta .me:not(.tapped):has(+.me:not(.emoji)) {
+  border-bottom-right-radius: 0.25em;
+}
+
+#workskin .insta .you:not(.tapped):has(+.you:not(.emoji)) {
+  border-bottom-left-radius: 0.25em;
+}
+
+#workskin .insta .status {
+  color: #8e8e93;
+  text-align: right;
+  margin: 0.5em 1em 0;
+  padding: 0.5em 0.4em 0;
+  font-size: 0.75em;
+  font-weight: 600;
+}
+
+#workskin .insta .status .date {
+  font-weight: normal;
+}
+
+#workskin .insta .sendbox {
+  clear: both;
+  margin: 0;
+  border: 0 none;
+}
