@@ -26,7 +26,29 @@ body {
 }
 
 textarea {
-    width: 100%;
+    width: 95%;
     height: 120px;
     font-family: 'Lucida Console', 'Consolas', Monaco, monospace;
+}
+
+.controls pre {
+    white-space: pre;
+    overflow-x: auto;
+}
+
+@media screen and (max-width: 1000px) {
+    .container {
+        margin: 1em 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .controls,
+    .preview {
+        width: 100%;
+    }
 }

@@ -13,8 +13,8 @@ const PreviewLayout: React.FC<PreviewLayoutProps> = ({ controls, viewer }) => {
   return (
     <div className="container">
       <main className="controls">{controls}</main>
-      <aside className="preview" id={workskin ? "workskin" : "noworkskin"}>
-        {viewer}
+      <aside className="preview">
+        <div id={workskin ? "workskin" : "noworkskin"}>{viewer}</div>
       </aside>
     </div>
   );
