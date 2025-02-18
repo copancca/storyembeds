@@ -69,80 +69,84 @@ const Home: React.FC = () => {
 
   return (
     <div className="home">
-      <h1 className="sb-header">social embed generator</h1>
-      <Nav />
-      <p>
-        this tool generates embed code for social media posts. click a link
-        above to generate the html, then come here for the output css.
-      </p>
+      <div className="sb-outer">
+        <h1 className="sb-header">social embed generator</h1>
+        <Nav />
+        <p>
+          this tool generates embed code for social media posts. click a link
+          above to generate the html, then come here for the output css.
+        </p>
 
-      <h2 className="sb-header">embeds used</h2>
-      <p>
-        check the embeds you used, then click the generate button to output your
-        css.
-      </p>
-      <ul>
-        {Object.keys(CSS_FILES).map((file) => (
-          <li key={file}>
-            <label>
-              <input
-                type="checkbox"
-                checked={selectedFiles.includes(file)}
-                onChange={() => handleCheckboxChange(file)}
-              />
-              {file}
-            </label>
-          </li>
-        ))}
-      </ul>
-      <button onClick={generateCSS}>generate css</button>
-      <textarea
-        placeholder="css output"
-        readOnly
-        value={concatenatedCSS}
-      ></textarea>
-      <hr />
-      <h2 className="sb-header">demo</h2>
-      <p className="workskin-status">
-        work skin is <b>{workskin ? "on" : "off"}</b>
-      </p>
-      <button onClick={() => toggleWorkSkin()}>toggle work skin</button>
-      <div id="main">
-        <div id={workskin ? "workskin" : "noworkskin"}>
-          <div className="preface group">
-            <h2 className="title heading">story title</h2>
-            <h3 className="byline heading">
-              <a href="#">author</a>
-            </h3>
-          </div>
-          <div id="chapters">
-            <div className="chapter">
-              <div className="chapter preface group">
-                <h3 className="title">
-                  <a href="#">Chapter 1</a>: has a title
-                </h3>
+        <h2 className="sb-header">embeds used</h2>
+        <p>
+          check the embeds you used, then click the generate button to output
+          your css.
+        </p>
+        <ul>
+          {Object.keys(CSS_FILES).map((file) => (
+            <li key={file}>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={selectedFiles.includes(file)}
+                  onChange={() => handleCheckboxChange(file)}
+                />
+                {file}
+              </label>
+            </li>
+          ))}
+        </ul>
+        <button onClick={generateCSS}>generate css</button>
+        <textarea
+          placeholder="css output"
+          readOnly
+          value={concatenatedCSS}
+        ></textarea>
+        <hr />
+        <h2 className="sb-header">demo</h2>
+        <p className="workskin-status">
+          work skin is <b>{workskin ? "on" : "off"}</b>
+        </p>
+        <button onClick={() => toggleWorkSkin()}>toggle work skin</button>
+      </div>
+      <div id="outer">
+        <div id="main">
+          <div id={workskin ? "workskin" : "noworkskin"}>
+            <div className="preface group">
+              <h2 className="title heading">story title</h2>
+              <h3 className="byline heading">
+                <a href="#">author</a>
+              </h3>
+            </div>
+            <div id="chapters">
+              <div className="chapter">
+                <div className="chapter preface group">
+                  <h3 className="title">
+                    <a href="#">Chapter 1</a>: has a title
+                  </h3>
 
-                <div id="summary" className="summary module">
-                  <h3 className="heading">Summary:</h3>
-                  <blockquote className="userstuff">
-                    <p>
-                      This is a summary for the chapter. It’s a sneak peak at
-                      what’s to come.
-                    </p>
-                  </blockquote>
+                  <div id="summary" className="summary module">
+                    <h3 className="heading">Summary:</h3>
+                    <blockquote className="userstuff">
+                      <p>
+                        This is a summary for the chapter. It’s a sneak peak at
+                        what’s to come.
+                      </p>
+                    </blockquote>
+                  </div>
+
+                  <div id="notes" className="notes module">
+                    <h3 className="heading">Notes:</h3>
+                    <blockquote className="userstuff">
+                      <p>now some author notes</p>
+                    </blockquote>
+                  </div>
                 </div>
-
-                <div id="notes" className="notes module">
-                  <h3 className="heading">Notes:</h3>
-                  <blockquote className="userstuff">
-                    <p>now some author notes</p>
-                  </blockquote>
-                </div>
+                <div
+                  className="userstuff"
+                  dangerouslySetInnerHTML={{ __html: demoHtml }}
+                />
               </div>
-              <div
-                className="userstuff"
-                dangerouslySetInnerHTML={{ __html: demoHtml }}
-              />
             </div>
           </div>
         </div>

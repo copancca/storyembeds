@@ -15,7 +15,9 @@ const Viewer: React.FC<ViewerProps> = ({ render }) => {
         work skin is <b>{workskin ? "on" : "off"}</b>
       </p>
       <button onClick={() => toggleWorkSkin()}>toggle work skin</button>
-      {render()}
+      <div id="outer">
+        <div id="main">{render()}</div>
+      </div>
     </>
   );
 };

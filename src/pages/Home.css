@@ -6,10 +6,13 @@ body {
   padding: 0;
 }
 
+.sb-outer {
+  padding: 0 2rem;
+}
+
 .home {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
 }
 
 .home ul {
