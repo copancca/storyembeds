@@ -14,10 +14,11 @@ cp -r .git temp
 
 # 4. Checkout the gh-pages branch
 cd temp
-if [[ -z "$(git branch --list gh-pages)" ]]; then
+if [[ -z "$(git branch --list -r origin/gh-pages)" ]]; then
   git checkout --orphan gh-pages
 else
   git checkout gh-pages
+  git pull origin gh-pages
 fi
 
 # 5. Remove all files except .git folder
