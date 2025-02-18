@@ -53,7 +53,8 @@ const Home: React.FC = () => {
       selectedFiles.map(async (file) => {
         try {
           const response = await fetch(
-            import.meta.env.BASE_URL + CSS_FILES[file]
+            import.meta.env.BASE_URL + CSS_FILES[file],
+            { cache: "no-cache" }
           );
           if (!response.ok) {
             return `/* Failed to load ${file} (HTTP ${response.status}) */\n`;
