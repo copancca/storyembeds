@@ -340,6 +340,8 @@
 }
 
 #workskin .phone .green .me:has(+:not(.me))::after,
+#workskin .phone .green .me:has(+ .emoji)::after,
+#workskin .phone .green .me:has(+p > .tapback)::after,
 #workskin .phone .green .me:last-child::after {
   border-left-color: #34c759;
 }
