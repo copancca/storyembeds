@@ -42,7 +42,7 @@ export const PhoneMessages: React.FC<PhoneProps> = ({
   const displayName = phone.contact ? phone.contact.name : phone.phoneNumber;
   return (
     <div className="phone">
-      <hr className="sendbox" />
+      <div className="sendbox" />
       <div className="header">
         <div className="back" />
         {phone.supportsIMessage ? (
