@@ -11,24 +11,55 @@
   padding: 1.25em 2.5em;
   border: 1px solid #efefef;
   border-radius: 0.5em;
+  width: fit-content;
 }
 
-#workskin .fakenews b {
+#workskin .fakenews h5 {
+  font-family: "Proxima Nova", sans-serif;
+  text-decoration: none;
+  font-style: normal;
+  color: #2a2a2a;
+  font-weight: 700;
+  font-size: 1em;
+  margin: 1.5em 0 1em;
+  border: 0;
+  padding: 0 0 0.5em;
+}
+
+#workskin .fakenews p+h5 {
+  padding: 1.5em 0 0.5em;
+}
+
+#workskin .fakenews h6 {
+  font-family: "Proxima Nova", sans-serif;
+  text-decoration: underline;
+  font-style: normal;
+  color: #2a2a2a;
+  font-weight: 400;
+  font-size: 1em;
+  margin: 1em 0;
+  border: 0;
+  padding: 0;
+}
+
+#workskin .fakenews.times,
+#workskin .fakenews.times h5,
+#workskin .fakenews.times h6 {
+  font-family: Georgia, "Times New Roman", Times, "Droid Serif", serif;
+  font-size: 1em;
+}
+
+#workskin .fakenews.mono,
+#workskin .fakenews.mono h5,
+#workskin .fakenews.mono h6 {
+  font-family: 'Monaco', 'Consolas', Courier, monospace;
   text-transform: uppercase;
 }
 
 #workskin pre.fakenews {
+  font-family: 'Monaco', 'Consolas', Courier, monospace;
   padding: 2.5em;
   line-height: 1.5;
   white-space: pre;
   overflow-x: auto;
-}
-
-#workskin .fakenews.times {
-  font-family: Georgia, "Times New Roman", Times, "Droid Serif", serif;
-}
-
-#workskin .fakenews.mono,
-#workskin pre.fakenews {
-  font-family: 'Monaco', 'Consolas', Courier, monospace;
 }
