@@ -1,16 +1,19 @@
 #workskin .twt {
   max-width: 450px;
   min-width: 300px;
-  margin: 0em auto;
+  margin: 0em auto 1em;
   padding-left: 20px;
   padding-right: 20px;
   border: 1px solid #c7c7c7;
   border-radius: 10px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
-  margin-bottom: 1em;
   background: #ffffff;
   color: #000000;
   font-size: 1rem;
+}
+
+#workskin .twt+.twt {
+  margin-top: 3.5em;
 }
 
 #workskin .twt p {
@@ -26,7 +29,16 @@
 }
 
 #workskin .twt .desc {
-  display: none !important;
+  display: inline-block;
+  height: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 0;
+  overflow: hidden;
+  color: transparent;
+  position: absolute;
 }
 
 #workskin .twt .hl:hover {
@@ -43,7 +55,7 @@
   float: left;
 }
 
-#workskin .twt .icon {
+#workskin .twt .pfp {
   border-radius: 50%;
   display: inline-block;
   width: 3.5em;

@@ -39,6 +39,7 @@ export const PhoneMessages: React.FC<PhoneProps> = ({
       }
     }
   }
+  const displayName = phone.contact ? phone.contact.name : phone.phoneNumber;
   return (
     <div className="phone">
       <hr className="sendbox" />
@@ -66,7 +67,7 @@ export const PhoneMessages: React.FC<PhoneProps> = ({
           </p>
           <h5 className="name">
             <span className="desc">iPhone messages from </span>
-            {phone.contact ? phone.contact.name : phone.phoneNumber}
+            {displayName}
           </h5>
         </div>
       </div>
@@ -89,7 +90,7 @@ export const PhoneMessages: React.FC<PhoneProps> = ({
                   (msg.me ? "me" : "you") + (emojiOnly ? " emoji" : "")
                 }
               >
-                <span className="desc">{msg.me ? "Me" : "Them"}: </span>
+                <span className="desc">{msg.me ? "Me" : displayName}: </span>
                 {formatText(msg.text)}
                 {msg.tapback ? (
                   <span className="tapback">

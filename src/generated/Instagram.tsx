@@ -67,7 +67,9 @@ export const PhoneDMs: React.FC<PhoneProps> = ({ phone, now: globalNow }) => {
                   (msg.tapback ? " tapped" : "")
                 }
               >
-                <span className="desc">{msg.me ? "Me" : "Them"}: </span>
+                <span className="desc">
+                  {msg.me ? "Me" : phone.contact.name}:{" "}
+                </span>
                 {formatText(msg.text)}
                 {msg.tapback ? (
                   <span className="tapback">

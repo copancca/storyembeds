@@ -21,7 +21,7 @@ export const Parent: React.FC<ThreadProps> = ({ tweet }) => {
         <div className="icon-replycontainer">
           <p>
             <img
-              className="icon"
+              className="pfp"
               width="48"
               height="48"
               src={tweet.user.pfp}
@@ -94,7 +94,7 @@ export const Reply: React.FC<ThreadProps> = ({ tweet }) => {
         <div className="icon-replycontainer">
           <p>
             <img
-              className="icon"
+              className="pfp"
               height="48"
               width="48"
               src={tweet.user.pfp}
@@ -120,9 +120,7 @@ export const Reply: React.FC<ThreadProps> = ({ tweet }) => {
             <p>
               <span className="social">
                 <span className="qt"></span>
-                {formatTwitterCount(
-                  tweet.quotes && tweet.quotes > 0 ? tweet.quotes : 1
-                )}
+                {formatTwitterCount(tweet.quotes)}
                 <span className="desc">
                   {" "}
                   {tweet.quotes === 1 ? "Reply" : "Replies"}{" "}
@@ -168,7 +166,7 @@ export const FocusTweet: React.FC<ThreadProps> = ({ tweet }) => {
         <div className="icon-container">
           <p>
             <img
-              className="icon"
+              className="pfp"
               height="48"
               width="48"
               src={tweet.user.pfp}
@@ -200,7 +198,7 @@ export const FocusTweet: React.FC<ThreadProps> = ({ tweet }) => {
             <div className="icon-container">
               <p>
                 <img
-                  className="icon"
+                  className="pfp"
                   height="48"
                   width="48"
                   src={tweet.quoted?.user.pfp}

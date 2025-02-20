@@ -244,7 +244,6 @@ const renderTweets = (): React.ReactNode => {
                 <Reply tweet={r} key={k} />
               ))}
             </div>
-            <p>&nbsp;</p>
           </React.Fragment>
         ))}
       </div>
