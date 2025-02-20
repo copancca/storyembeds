@@ -29,7 +29,16 @@
 }
 
 #workskin .twt .desc {
-  display: none !important;
+  display: inline-block;
+  height: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 0;
+  overflow: hidden;
+  color: transparent;
+  position: absolute;
 }
 
 #workskin .twt .hl:hover {
