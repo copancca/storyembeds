@@ -6,15 +6,19 @@ import {
   formatIOSTimestamp,
   longSince,
 } from "../lib/formatters";
-import { MessageBlock } from "../types/IPhone";
+import { Contact, MessageBlock } from "../types/IPhone";
 
 interface PhoneProps {
   phone: MessageBlock;
+  owner?: string;
+  contact?: Contact;
   now?: Date;
 }
 
 export const PhoneMessages: React.FC<PhoneProps> = ({
   phone,
+  contact,
+  owner,
   now: globalNow,
 }) => {
   if (!phone) return null;
@@ -39,7 +43,8 @@ export const PhoneMessages: React.FC<PhoneProps> = ({
       }
     }
   }
-  const displayName = phone.contact ? phone.contact.name : phone.phoneNumber;
+  const displayName = contact?.displayName || phone.phoneNumber;
+  const name = contact?.name || phone.phoneNumber;
   return (
     <div className="phone">
       <div className="sendbox" />
@@ -53,14 +58,16 @@ export const PhoneMessages: React.FC<PhoneProps> = ({
         ) : null}
         <div className="profile">
           <p className="pfp">
-            {phone.contact?.pfp ? (
+            {contact?.pfp ? (
               <img
                 className="pfp"
-                src={phone.contact.pfp}
+                src={contact.pfp}
                 alt="profile image"
+                width="48"
+                height="48"
               />
-            ) : phone.contact && formatFirstLetter(phone.contact.name) ? (
-              <span>{formatFirstLetter(phone.contact.name)}</span>
+            ) : contact && formatFirstLetter(contact.displayName) ? (
+              <span>{formatFirstLetter(contact.displayName)}</span>
             ) : (
               <span className="nopfp" />
             )}
@@ -90,7 +97,7 @@ export const PhoneMessages: React.FC<PhoneProps> = ({
                   (msg.me ? "me" : "you") + (emojiOnly ? " emoji" : "")
                 }
               >
-                <span className="desc">{msg.me ? "Me" : displayName}: </span>
+                <span className="desc">{msg.me ? owner || "Me" : name}: </span>
                 {formatText(msg.text)}
                 {msg.tapback ? (
                   <span className="tapback">

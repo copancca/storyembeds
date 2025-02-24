@@ -1,9 +1,12 @@
 export interface IPhoneData {
   now?: Date;
+  owner?: string;
+  contacts: Record<string, Contact>;
   messageBlocks: MessageBlock[];
 }
 
 export interface MessageBlock {
+  name?: string;
   contact?: Contact;
   phoneNumber?: string;
   now?: Date;
@@ -14,6 +17,7 @@ export interface MessageBlock {
 
 export interface Contact {
   name: string;
+  displayName: string;
   pfp?: string;
 }
 

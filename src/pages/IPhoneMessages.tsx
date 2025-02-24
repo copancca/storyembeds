@@ -6,16 +6,24 @@ import { copyThreadHTML } from "../lib/clip";
 import { newDateOrThrow, newOptionalDate } from "../lib/parsers";
 import { useConfigStore } from "../store/useConfigStore";
 import { PhoneMessages } from "../generated/IPhone";
-import { IPhoneData, Message, MessageBlock } from "../types/IPhone";
+import { Contact, IPhoneData, Message, MessageBlock } from "../types/IPhone";
 
 const example = `{
   "now": "2023-10-01T13:05:00Z",
+  "owner": "Charlie",
+  "contacts": [
+    {
+      "name": "Alice",
+      "pfp": "https://i.imgur.com/yourimage.png"
+    },
+    {
+      "name": "Bob",
+      "display": "Bob ❤️❤️❤️"
+    }
+  ],
   "messageblocks": [
     {
-      "contact": {
-        "name": "alice",
-        "pfp": "https://i.imgur.com/yourimage.png"
-      },
+      "name": "Alice",
       "messages": [
         {
           "from": "me",
@@ -36,10 +44,8 @@ const example = `{
       ]
     },
     {
-      "contact": {
-        "name": "alice",
-        "iphone": false
-      },
+      "name": "Bob",
+      "iphone": false,
       "showstatus": true,
       "messages": [
         {
@@ -85,49 +91,76 @@ function parser(rawConfig: string): IPhoneData {
     throw new Error("invalid thread json");
   }
 
-  const { now: nowStr, messageblocks } = data;
+  const { now: nowStr, contacts, owner, messageblocks } = data;
 
   if (!Array.isArray(messageblocks)) {
     throw new Error(`"messageblocks" must be present and an array`);
   }
 
+  if (!(contacts === undefined || Array.isArray(contacts))) {
+    throw new Error(`"contacts" must be an array if present`);
+  }
+
+  if (!(owner === undefined || typeof owner === "string")) {
+    throw new Error(`"owner" must be a string if present`);
+  }
+
+  const contactRecord = ((contacts as any[] | undefined) || []).reduce(
+    (acc: Record<string, Contact>, acct: any): Record<string, Contact> => {
+      if (typeof acct !== "object") {
+        throw new Error(`"contact" must be an object`);
+      }
+      const { name, display, pfp } = acct;
+      if (!name) {
+        throw new Error(`"name" required for contact`);
+      } else if (typeof name !== "string") {
+        throw new Error(`"name" must be a string`);
+      }
+      const displayName = display || name;
+      if (typeof displayName !== "string") {
+        throw new Error(`"display" must be a string`);
+      }
+      if (!(pfp === undefined || typeof pfp === "string")) {
+        throw new Error(`"pfp" must be a string if present`);
+      }
+      acc[name] = { name, displayName, pfp };
+      return acc;
+    },
+    {} as Record<string, Contact>
+  );
+  console.log(contactRecord);
+
   const now = newOptionalDate(nowStr);
 
   return {
     now,
+    owner,
+    contacts: contactRecord,
     messageBlocks: messageblocks.map((mb): MessageBlock => {
-      const { contact, phonenumber, messages } = mb;
+      const { name, phonenumber, messages } = mb;
       if (!Array.isArray(messages)) {
         throw new Error(`"messages" must be present and an array`);
       }
-      if (!phonenumber && !contact) {
-        throw new Error(`either "phonenumber" or "contact" must be present`);
+      if (!phonenumber && !name) {
+        throw new Error(`one of "name" or "phonenumber" must be present`);
       }
       if (phonenumber && typeof phonenumber !== "string") {
         throw new Error(`"phonenumber" must be a string`);
       }
-      if (contact) {
-        if (typeof contact !== "object") {
-          throw new Error(`"contact" must be an object`);
-        }
-        if (!contact.name) {
-          throw new Error(`"name" required for contact`);
-        } else if (typeof contact.name !== "string") {
+      if (name) {
+        if (typeof name !== "string") {
           throw new Error(`"name" must be a string`);
         }
-        if (contact.pfp && typeof contact.pfp !== "string") {
-          throw new Error(`"pfp" must be a string`);
+        if (!contactRecord[name]) {
+          throw new Error(`"${name}" not found in contacts`);
         }
       }
       return {
-        contact: contact && {
-          name: contact.name,
-          pfp: contact.pfp,
-        },
+        name,
         now: mb.now ? newDateOrThrow(mb.now) : undefined,
-        phoneNumber: mb.phonenumber,
+        phoneNumber: phonenumber,
         showStatus: mb.showstatus,
-        supportsIMessage: contact?.iphone !== false,
+        supportsIMessage: mb.iphone !== false,
         messages: mb.messages.map((m: any): Message => {
           if (typeof m !== "object") {
             throw new Error(`"message" must be an object`);
@@ -158,33 +191,48 @@ function parser(rawConfig: string): IPhoneData {
 
 const instruction = (
   <React.Fragment>
+    <p>paste in JSON data to generate a thread.</p>
     <p>
-      paste in JSON data to generate a thread. i had most of this for a separate
-      project but figured you might find it useful. get them some new phones,
-      etc.
+      the JSON data is an object with at least two properties:{" "}
+      <code>contacts</code> and <code>messageblocks</code>.
     </p>
     <p>
-      the JSON data should be an object with one property:{" "}
-      <code>messageblocks</code>. you can optinally set <code>now</code> which
-      is used to decide when to break up messages, but it's not super tested.
-      each message block generates its own html to be copied.
+      in additionto the two required properties, you can also set{" "}
+      <code>now</code> and <code>owner</code>. <code>now</code> is the current
+      time, which is used to format timestamps if they're set on messages.{" "}
+      <code>owner</code> is the name of the person that owns the phone, and is
+      used only to display the name of the other user when the work skin is
+      disabled. if it is not set, the description text will say "Me".
     </p>
     <p>
-      a message block is a list of phone scenes, each of which must have a{" "}
-      <code>contact</code> which has a <code>name</code> and an optional{" "}
-      <code>pfp</code> profile picture. if no pfp is set, a placeholder will be
-      used. the <code>iphone</code> property can be set to false to make green
-      bubbles.
+      contacts is a list of phone contacts, each with a <code>name</code> and
+      optional <code>display</code> display name, which allows you to use a
+      simpler name when writing the text (e.g. "Alice" instead of "Alice
+      ❤️❤️❤️"). in that case, the description text with no skin will be "Alice".
+      it's not required though. <code>pfp</code> is an optional profile picture.
+      if you don't set a pfp, the profile picture will be a placeholder.
+    </p>
+    <p>
+      messageblocks is a list of message blocks, each of which must have a{" "}
+      <code>name</code> which is the name field of the contact that the messages
+      are from. each message block generates its own html to be copied.
     </p>
     <p>
       a message block will also have a list of <code>messages</code>. each
       message must have a <code>from</code> (either "me", which is the phone's
-      user, or "you") and a <code>text</code> field. you can also set{" "}
-      <code>sent</code> and <code>read</code> timestamps, and a{" "}
-      <code>tapback</code> emoji.
+      user, or "you") and a <code>text</code> field. <code>tapback</code> can be
+      set to an emoji to show a tapback. you can also set <code>sent</code> and{" "}
+      <code>read</code> timestamps, <code>delivered</code> can be set to{" "}
+      <code>false</code> to show a message that failed to send.
     </p>
     <p>
       text can have newlines entered as <code>\n</code>.
+    </p>
+    <p>
+      if you set <code>iphone</code> to <code>false</code>, the messages will be
+      green instead of blue. if you set <code>showstatus</code> to{" "}
+      <code>true</code>, the status indicators (e.g. delivered/read) will be
+      shown.
     </p>
   </React.Fragment>
 );
@@ -194,19 +242,29 @@ const renderPhones = (): React.ReactNode => {
   if (!iphoneData) {
     return null;
   }
-  const now = iphoneData.now;
-  return iphoneData?.messageBlocks.map((mb, i) => (
-    <React.Fragment key={i}>
-      <h3>message block {i + 1}</h3>
-      <div className="block-content userstuff" id={`thread-block-${i}`}>
-        <PhoneMessages phone={mb} now={now} />
-      </div>
-      <button className="copy-btn" onClick={() => copyThreadHTML(i, setOutput)}>
-        Copy this block HTML
-      </button>
-      <hr />
-    </React.Fragment>
-  ));
+  return iphoneData?.messageBlocks.map((mb, i) => {
+    const contact = mb.name ? iphoneData.contacts[mb.name] : undefined;
+    return (
+      <React.Fragment key={i}>
+        <h3>message block {i + 1}</h3>
+        <div className="block-content userstuff" id={`thread-block-${i}`}>
+          <PhoneMessages
+            owner={iphoneData.owner}
+            now={iphoneData.now}
+            contact={contact}
+            phone={mb}
+          />
+        </div>
+        <button
+          className="copy-btn"
+          onClick={() => copyThreadHTML(i, setOutput)}
+        >
+          Copy this block HTML
+        </button>
+        <hr />
+      </React.Fragment>
+    );
+  });
 };
 
 const IPhoneMessages: React.FC = () => {

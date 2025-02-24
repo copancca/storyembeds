@@ -1,5 +1,5 @@
 export interface TwitterData {
-  Users: User[];
+  Users: Record<string, User>;
   ThreadBlocks: ThreadBlock[];
 }
 

@@ -176,7 +176,7 @@ function parser(rawConfig: string): TwitterData {
       }),
     };
   });
-  return { Users: importedUsers, ThreadBlocks: blocks };
+  return { Users: users, ThreadBlocks: blocks };
 }
 
 const instruction = (
