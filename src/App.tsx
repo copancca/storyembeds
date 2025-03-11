@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import InstagramDM from "./pages/InstagramDM";
 import IPhoneMessages from "./pages/IPhoneMessages";
 import Twitter from "./pages/Twitter";
+import StoryText from "./pages/StoryText";
 
 const App: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const App: React.FC = () => {
         <Route path="/instagram" element={<InstagramDM />} />
         <Route path="/iphone" element={<IPhoneMessages />} />
         <Route path="/twitter" element={<Twitter />} />
+        <Route path="/story" element={<StoryText />} />
       </Routes>
     </Router>
   );

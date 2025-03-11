@@ -11,12 +11,16 @@ interface ConfigState {
   iphoneData: IPhoneData | null;
   workskin: boolean;
   output: string;
+  storyData: string;
+  renderedStory: string;
   toggleWorkSkin: () => void;
   setRawConfig: (newConfig: string) => void;
   setTwitterData: (newData: TwitterData) => void;
   setInstaData: (newData: any) => void;
   setIphoneData: (newData: any) => void;
   setOutput: (newOutput: string) => void;
+  setStoryData: (newStoryData: string) => void;
+  setRenderedStory: (newRenderedStory: string) => void;
 }
 
 export const useConfigStore = create<ConfigState>((set) => ({
@@ -26,10 +30,15 @@ export const useConfigStore = create<ConfigState>((set) => ({
   iphoneData: null,
   workskin: true,
   output: "",
+  storyData: "",
+  renderedStory: "",
   toggleWorkSkin: () => set((state) => ({ workskin: !state.workskin })),
   setRawConfig: (newConfig) => set({ rawConfig: newConfig }),
   setTwitterData: (newData) => set({ twitterData: newData }),
   setInstaData: (newData) => set({ instaData: newData }),
   setIphoneData: (newData) => set({ iphoneData: newData }),
   setOutput: (newOutput) => set({ output: newOutput }),
+  setStoryData: (newStoryData) => set({ storyData: newStoryData }),
+  setRenderedStory: (newRenderedStory) =>
+    set({ renderedStory: newRenderedStory }),
 }));

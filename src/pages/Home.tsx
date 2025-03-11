@@ -11,6 +11,7 @@ const CSS_FILES: { [key: string]: string } = {
   "iphone messages": "styles/IPhoneMessages.css",
   instagram: "styles/InstagramDM.css",
   news: "styles/News.css",
+  basic: "styles/Basic.css",
 };
 
 const Home: React.FC = () => {
@@ -31,12 +32,17 @@ const Home: React.FC = () => {
     news.rel = "stylesheet";
     news.href = import.meta.env.BASE_URL + "styles/News.css";
     document.head.appendChild(news);
+    const basic = document.createElement("link");
+    basic.rel = "stylesheet";
+    basic.href = import.meta.env.BASE_URL + "styles/Basic.css";
+    document.head.appendChild(basic);
 
     return () => {
       document.head.removeChild(insta); // clean up on unmount
       document.head.removeChild(iphone);
       document.head.removeChild(twitter);
       document.head.removeChild(news);
+      document.head.removeChild(basic);
     };
   }, []);
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
@@ -52,7 +58,7 @@ const Home: React.FC = () => {
 
   const generateCSS = async () => {
     const fetchedCSS = await Promise.all(
-      selectedFiles.map(async (file) => {
+      ["basic", ...selectedFiles].map(async (file) => {
         try {
           const response = await fetch(
             import.meta.env.BASE_URL + CSS_FILES[file],
@@ -74,7 +80,7 @@ const Home: React.FC = () => {
   return (
     <div className="home">
       <div className="sb-outer">
-        <h1 className="sb-header">social embed generator</h1>
+        <h1 className="sb-header">ao3 css/html generator</h1>
         <Nav />
         <p>
           this tool generates embed code for social media posts. click a link
@@ -87,18 +93,21 @@ const Home: React.FC = () => {
           your css.
         </p>
         <ul>
-          {Object.keys(CSS_FILES).map((file) => (
-            <li key={file}>
-              <label>
-                <input
-                  type="checkbox"
-                  checked={selectedFiles.includes(file)}
-                  onChange={() => handleCheckboxChange(file)}
-                />
-                {file}
-              </label>
-            </li>
-          ))}
+          {Object.keys(CSS_FILES).map(
+            (file) =>
+              file !== "basic" && (
+                <li key={file}>
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={selectedFiles.includes(file)}
+                      onChange={() => handleCheckboxChange(file)}
+                    />
+                    {file}
+                  </label>
+                </li>
+              )
+          )}
         </ul>
         <button onClick={generateCSS}>generate css</button>
         <textarea

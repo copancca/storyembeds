@@ -6,6 +6,13 @@ const Nav: React.FC = () => {
   return (
     <nav className="nav">
       <NavLink
+        to="/story"
+        className={({ isActive }) => (isActive ? "active" : "")}
+      >
+        doc2html
+      </NavLink>{" "}
+      |{" "}
+      <NavLink
         to="/twitter"
         className={({ isActive }) => (isActive ? "active" : "")}
       >
