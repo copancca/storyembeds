@@ -1,7 +1,7 @@
 #workskin .fakenews {
   font-family: "Proxima Nova", sans-serif;
   font-weight: normal;
-  font-size: 0.857em;
+  font-size: 0.85em;
   text-align: justify;
   text-justify: inter-word;
   max-width: 85%;
@@ -12,6 +12,9 @@
   border: 1px solid #efefef;
   border-radius: 0.5em;
   width: fit-content;
+  line-height: 1.4;
+  margin-inline-start: 0;
+  border-inline-start: 0 none transparent;
 }
 
 #workskin .fakenews h5 {
