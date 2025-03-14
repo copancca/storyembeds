@@ -220,7 +220,8 @@ const cleanWordOnline = (doc: Document) => {
   // each top-level <div> tag for additional processing
   let currentList: HTMLElement[] = [];
   let currentListOrdered = false;
-  doc.querySelectorAll("body > div").forEach((div) => {
+  const divs = doc.querySelectorAll("body > div");
+  divs.forEach((div) => {
     if (div.children.length === 0) {
       div.remove();
       return;
@@ -346,6 +347,17 @@ const cleanWordOnline = (doc: Document) => {
     doc.body.appendChild(currentList[0]);
     currentList = [];
   }
+  // when pasting text from within a single paragraph, the content actually
+  // comes in just a series of <span> tags. wrap this in a <p> tag.
+  const spans = doc.querySelectorAll("body > span");
+  const srcP = doc.createElement("p");
+  spans.forEach((span) => {
+    srcP.appendChild(span.cloneNode(true));
+    span.remove();
+  });
+  const destP = doc.createElement("p");
+  processWordOnlineParagraph(srcP, destP, doc);
+  doc.body.appendChild(destP);
 };
 
 export default cleanWordOnline;

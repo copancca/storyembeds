@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useConfigStore } from "../store/useConfigStore";
+import { useDataStore } from "../store/useDataStore";
 import Nav from "../components/Nav";
 import "./Home.css";
 import "../layouts/AO3.css";
 import { copyText } from "../lib/clip";
 import demoHtml from "../assets/demo.html?raw";
+import { sectionBreakStyle } from "../lib/style";
 
 const CSS_FILES: { [key: string]: string } = {
   twitter: "styles/Twitter.css",
@@ -49,6 +51,7 @@ const Home: React.FC = () => {
   const [concatenatedCSS, setConcatenatedCSS] = useState<string>("");
   const [copied, setCopied] = useState<boolean>(false);
   const { workskin, toggleWorkSkin } = useConfigStore();
+  const { customSectionBreak, customSectionBreakStyle } = useDataStore();
 
   const handleCheckboxChange = (file: string) => {
     setSelectedFiles((prev) =>
@@ -73,7 +76,12 @@ const Home: React.FC = () => {
         }
       })
     );
-    setConcatenatedCSS(fetchedCSS.join("\n"));
+    const combinedCSS =
+      fetchedCSS.join("\n") +
+      (customSectionBreak
+        ? "\n" + sectionBreakStyle(customSectionBreak, customSectionBreakStyle)
+        : "");
+    setConcatenatedCSS(combinedCSS);
     setCopied(false);
   };
 

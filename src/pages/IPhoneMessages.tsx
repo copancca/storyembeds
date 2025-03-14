@@ -128,7 +128,6 @@ function parser(rawConfig: string): IPhoneData {
     },
     {} as Record<string, Contact>
   );
-  console.log(contactRecord);
 
   const now = newOptionalDate(nowStr);
 

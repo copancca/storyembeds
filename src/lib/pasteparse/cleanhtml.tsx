@@ -40,6 +40,7 @@ export const cleanHtml = (doc: Document) => {
     "del",
     "details",
     "dfn",
+    "div",
     "dl",
     "dt",
     "em",
@@ -82,9 +83,25 @@ export const cleanHtml = (doc: Document) => {
     "ul",
     "var",
   ];
-  doc.body.querySelectorAll(`:not(${allowedTags.join(",")})`).forEach((el) => {
-    el.remove();
-  });
+  const walker = doc.createTreeWalker(
+    doc.body,
+    NodeFilter.SHOW_COMMENT | NodeFilter.SHOW_ELEMENT
+  );
+  const nodesToRemove = [];
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    if (
+      node.nodeType === Node.ELEMENT_NODE &&
+      !allowedTags.includes((node as HTMLElement).tagName.toLowerCase())
+    ) {
+      nodesToRemove.push(node as HTMLElement);
+    } else if (node.nodeType === Node.COMMENT_NODE) {
+      nodesToRemove.push(node as Comment);
+    }
+  }
+  for (const node of nodesToRemove) {
+    node.remove();
+  }
   const allowedAttributes = ["class", "name", "title"];
   const imgOnlyAttributes = ["alt", "height", "width"];
   doc.body.querySelectorAll("*").forEach((el) => {
@@ -106,46 +123,11 @@ export const cleanHtml = (doc: Document) => {
     }
   });
 
-  // now, take the innerHTML and wrap lines at each block element before
-  // outputting it. this is to make it easier to read in the textarea.
-  // in other words, insert a newline after each </p>, </h1>, </h2>, etc.
-  const html = doc.body.innerHTML;
-  const wrappedHtml = html
-    .replace(/<\/p>/g, "</p>\n")
-    .replace(/<br>/g, "<br>\n")
-    .replace(/<\/div>/g, "</div>\n")
-    .replace(/<\/pre>/g, "</pre>\n")
-    .replace(/<\/table>/g, "</table>\n")
-    .replace(/<\/tr>/g, "</tr>\n")
-    .replace(/<\/ul>/g, "</ul>\n")
-    .replace(/<\/ol>/g, "</ol>\n")
-    .replace(/<\/li>/g, "</li>\n")
-    .replace(/<\/h([1-6])>/g, "</h$1>\n");
-  // if any block elements are longer than 250 characters, wrap them at 250
-  // characters, taking care not to break words.
-  const lines = wrappedHtml.split("\n");
-  const wrappedLines = lines.map((line) => {
-    if (line.length <= 250) return line;
-
-    const words = line.split(" ");
-    const wrappedParts = [];
-    let currentLine = "";
-
-    for (const word of words) {
-      if (currentLine.length + word.length + 1 <= 250) {
-        currentLine += (currentLine ? " " : "") + word;
-      } else {
-        wrappedParts.push(currentLine);
-        currentLine = word;
-      }
+  doc.body.querySelectorAll("p").forEach((p) => {
+    if (p.innerHTML.trim() === "") {
+      p.innerHTML = "&nbsp;";
     }
-    if (currentLine) {
-      wrappedParts.push(currentLine);
-    }
-    return wrappedParts.join("\n");
   });
-
-  return wrappedLines.join("\n");
 };
 
 export default cleanHtml;

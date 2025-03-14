@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
-import Viewer from "../components/Viewer";
-import StoryInput from "../components/StoryInput";
-import PreviewLayout from "../layouts/Preview";
 import { useConfigStore } from "../store/useConfigStore";
+import Nav from "../components/Nav";
+import StoryInput from "../components/StoryInput";
+import "./Home.css";
+import "../layouts/AO3.css";
+import { useDataStore } from "../store/useDataStore";
+import { sectionBreakStyle } from "../lib/style";
 
 const StoryText: React.FC = () => {
-  const { renderedStory } = useConfigStore();
   useEffect(() => {
     const insta = document.createElement("link");
     insta.rel = "stylesheet";
@@ -36,19 +38,81 @@ const StoryText: React.FC = () => {
       document.head.removeChild(basic);
     };
   }, []);
-  const renderStory = () => {
-    return (
-      <div
-        className="userstuff"
-        dangerouslySetInnerHTML={{ __html: renderedStory }}
-      />
-    );
-  };
+  const { workskin, toggleWorkSkin } = useConfigStore();
+  const {
+    title,
+    author,
+    summary,
+    notes,
+    chapterTitle,
+    chapterNumber,
+    renderedStory,
+    customSectionBreak,
+    customSectionBreakStyle,
+  } = useDataStore();
+
   return (
-    <PreviewLayout
-      controls={<StoryInput buttonText="story it" titleText="gdoc to html" />}
-      viewer={<Viewer render={renderStory} />}
-    />
+    <div className="home">
+      <div className="sb-outer">
+        <h1 className="sb-header">doc to html</h1>
+        <Nav />
+        <StoryInput />
+        <hr />
+        <h2 className="sb-header">preview</h2>
+        <p className="workskin-status">
+          work skin is <b>{workskin ? "on" : "off"}</b>
+        </p>
+        <button onClick={() => toggleWorkSkin()}>toggle work skin</button>
+      </div>
+      {customSectionBreak && (
+        <style>
+          {sectionBreakStyle(customSectionBreak, customSectionBreakStyle)}
+        </style>
+      )}
+      <div id="outer">
+        <div id="main">
+          <div id={workskin ? "workskin" : "noworkskin"}>
+            <div className="preface group">
+              <h2 className="title heading">{title || "story title"}</h2>
+              <h3 className="byline heading">
+                <a href="#">{author || "author"}</a>
+              </h3>
+            </div>
+            <div id="chapters">
+              <div className="chapter">
+                <div className="chapter preface group">
+                  <h3 className="title">
+                    <a href="#">Chapter {chapterNumber || 1}</a>:{" "}
+                    {chapterTitle || "has a title"}
+                  </h3>
+
+                  <div id="summary" className="summary module">
+                    <h3 className="heading">Summary:</h3>
+                    <blockquote className="userstuff">
+                      <p>
+                        {summary ||
+                          "This is a summary for the chapter. It’s a sneak peak at what’s to come."}
+                      </p>
+                    </blockquote>
+                  </div>
+
+                  <div id="notes" className="notes module">
+                    <h3 className="heading">Notes:</h3>
+                    <blockquote className="userstuff">
+                      <p>{notes || "now some author notes"}</p>
+                    </blockquote>
+                  </div>
+                </div>
+                <div
+                  className="userstuff"
+                  dangerouslySetInnerHTML={{ __html: renderedStory }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

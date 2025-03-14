@@ -10,3 +10,11 @@
   text-align: justify;
   text-justify: inter-word;
 }
+
+#workskin .text-small {
+  font-size: 0.875em;
+}
+
+#workskin .text-big {
+  font-size: 1.14em;
+}
