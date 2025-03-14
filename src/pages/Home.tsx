@@ -94,6 +94,11 @@ const Home: React.FC = () => {
           this tool generates embed code for social media posts. click a link
           above to generate the html, then come here for the output css.
         </p>
+        <p>
+          there's also a tool for pasting from word processors like gdocs into
+          html that works with ao3. you can get it from the "doc2html" link in
+          the nav.
+        </p>
 
         <h2 className="sb-header">embeds used</h2>
         <p>
