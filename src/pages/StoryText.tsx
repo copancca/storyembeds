@@ -91,7 +91,7 @@ const StoryText: React.FC = () => {
                     <blockquote className="userstuff">
                       <p>
                         {summary ||
-                          "This is a summary for the chapter. It’s a sneak peak at what’s to come."}
+                          "This is a summary for the chapter. It’s a sneak peek at what’s to come."}
                       </p>
                     </blockquote>
                   </div>

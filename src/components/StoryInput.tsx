@@ -27,7 +27,7 @@ const StoryInput: React.FC = () => {
   } = useDataStore();
   const [error, setError] = useState<string | null>(null);
   const [isMetadataOpen, setIsMetadataOpen] = useState(false);
-  const [isCustomizationOpen, setIsCustomizationOpen] = useState(false);
+  const [isCustomizationOpen, setIsCustomizationOpen] = useState(true);
 
   const handlePaste = (
     e: React.ClipboardEvent<HTMLTextAreaElement>,
@@ -95,103 +95,28 @@ const StoryInput: React.FC = () => {
         />
         <button onClick={saveConfig}>show rendered html</button>
       </div>
-
-      <div className="collapsible-section">
-        <button
-          className="collapsible-toggle"
-          onClick={() => setIsMetadataOpen(!isMetadataOpen)}
-        >
-          {isMetadataOpen ? "▼" : "▶"} Story Metadata
-        </button>
-
-        {isMetadataOpen && (
-          <div className="collapsible-fields">
-            <p className="field-group-description">
-              these are all purely cosmetic so the render below will look more
-              like the actual published story. summary and notes both get
-              converted to html so you can paste in from a doc to generate html
-              to use.
-            </p>
-            <div className="field-group">
-              <label htmlFor="title">Title:</label>
-              <input
-                id="title"
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Story title"
-              />
-            </div>
-
-            <div className="field-group">
-              <label htmlFor="author">Author:</label>
-              <input
-                id="author"
-                type="text"
-                value={author}
-                onChange={(e) => setAuthor(e.target.value)}
-                placeholder="Author name"
-              />
-            </div>
-
-            <div className="field-group">
-              <label htmlFor="chapterNumber">Chapter Number:</label>
-              <input
-                id="chapterNumber"
-                type="number"
-                value={chapterNumber}
-                onChange={(e) => setChapterNumber(parseInt(e.target.value))}
-                min={1}
-                placeholder="Chapter number"
-              />
-            </div>
-
-            <div className="field-group">
-              <label htmlFor="chapterTitle">Chapter Title:</label>
-              <input
-                id="chapterTitle"
-                type="text"
-                value={chapterTitle}
-                onChange={(e) => setChapterTitle(e.target.value)}
-                placeholder="Chapter title"
-              />
-            </div>
-
-            <div className="field-group">
-              <label htmlFor="summary">Summary:</label>
-              <textarea
-                id="summary"
-                value={summary}
-                onPaste={(e) => handlePaste(e, setSummary)}
-                onChange={(e) => setSummary(e.target.value)}
-                placeholder="Story summary"
-              />
-            </div>
-
-            <div className="field-group">
-              <label htmlFor="notes">Notes:</label>
-              <textarea
-                id="notes"
-                value={notes}
-                onPaste={(e) => handlePaste(e, setNotes)}
-                onChange={(e) => setNotes(e.target.value)}
-                placeholder="Author notes"
-              />
-            </div>
-          </div>
-        )}
-      </div>
+      <h3 className="sb-header">instructions</h3>
+      <p>
+        paste from a word processor (e.g. google docs) and the contents of the
+        text box will be html ready to be added to a work. click the button to
+        preview the html it generates. you'll still have to replace any embeds
+        from the other pages with that output.
+      </p>
+      <p>
+        tested on google docs, word online, and word 15 (the version that comes
+        with office 365).
+      </p>
       <div className="collapsible-section">
         <button
           className="collapsible-toggle"
           onClick={() => setIsCustomizationOpen(!isCustomizationOpen)}
         >
-          {isCustomizationOpen ? "▼" : "▶"} Customization
+          {isCustomizationOpen ? "▼" : "▶"} customization
         </button>
         {isCustomizationOpen && (
           <div className="collapsible-fields">
             <div className="field-group">
-              <label htmlFor="customSectionBreak">Custom Section Break:</label>
+              <label htmlFor="customSectionBreak">custom section break:</label>
               <input
                 id="customSectionBreak"
                 value={customSectionBreak}
@@ -212,7 +137,7 @@ const StoryInput: React.FC = () => {
             </div>
             <div className="field-group">
               <label htmlFor="customSectionBreakStyle">
-                Custom Section Break Style:
+                custom section break style:
               </label>
               <input
                 id="customSectionBreakStyle"
@@ -237,18 +162,91 @@ const StoryInput: React.FC = () => {
           </div>
         )}
       </div>
+      <div className="collapsible-section">
+        <button
+          className="collapsible-toggle"
+          onClick={() => setIsMetadataOpen(!isMetadataOpen)}
+        >
+          {isMetadataOpen ? "▼" : "▶"} story metadata
+        </button>
 
-      <h3 className="sb-header">instructions</h3>
-      <p>
-        paste from a word processor (e.g. google docs) and the contents of the
-        text box will be html ready to be added to a work. click the button to
-        preview the html it generates. you'll still have to replace any embeds
-        from the other pages with that output.
-      </p>
-      <p>
-        tested on google docs, word online, and word 15 (the version that comes
-        with office 365).
-      </p>
+        {isMetadataOpen && (
+          <div className="collapsible-fields">
+            <p className="field-group-description">
+              these are all purely cosmetic so the render below will look more
+              like the actual published story. summary and notes both get
+              converted to html so you can paste in from a doc to generate html
+              to use.
+            </p>
+            <div className="field-group">
+              <label htmlFor="title">title:</label>
+              <input
+                id="title"
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Story title"
+              />
+            </div>
+
+            <div className="field-group">
+              <label htmlFor="author">author:</label>
+              <input
+                id="author"
+                type="text"
+                value={author}
+                onChange={(e) => setAuthor(e.target.value)}
+                placeholder="Author name"
+              />
+            </div>
+
+            <div className="field-group">
+              <label htmlFor="chapterNumber">chapter number:</label>
+              <input
+                id="chapterNumber"
+                type="number"
+                value={chapterNumber}
+                onChange={(e) => setChapterNumber(parseInt(e.target.value))}
+                min={1}
+                placeholder="Chapter number"
+              />
+            </div>
+
+            <div className="field-group">
+              <label htmlFor="chapterTitle">chapter title:</label>
+              <input
+                id="chapterTitle"
+                type="text"
+                value={chapterTitle}
+                onChange={(e) => setChapterTitle(e.target.value)}
+                placeholder="Chapter title"
+              />
+            </div>
+
+            <div className="field-group">
+              <label htmlFor="summary">summary:</label>
+              <textarea
+                id="summary"
+                value={summary}
+                onPaste={(e) => handlePaste(e, setSummary)}
+                onChange={(e) => setSummary(e.target.value)}
+                placeholder="Story summary"
+              />
+            </div>
+
+            <div className="field-group">
+              <label htmlFor="notes">notes:</label>
+              <textarea
+                id="notes"
+                value={notes}
+                onPaste={(e) => handlePaste(e, setNotes)}
+                onChange={(e) => setNotes(e.target.value)}
+                placeholder="Author notes"
+              />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
