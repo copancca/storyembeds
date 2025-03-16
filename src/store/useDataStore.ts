@@ -6,6 +6,7 @@ interface DataState {
   author: string;
   summary: string;
   notes: string;
+  endNotes: string;
   chapterTitle: string;
   chapterNumber: number;
   storyData: string;
@@ -16,6 +17,7 @@ interface DataState {
   setAuthor: (newAuthor: string) => void;
   setSummary: (newSummary: string) => void;
   setNotes: (newNotes: string) => void;
+  setEndNotes: (newEndNotes: string) => void;
   setChapterTitle: (newChapterTitle: string) => void;
   setChapterNumber: (newChapterNumber: number) => void;
   setStoryData: (newStoryData: string) => void;
@@ -29,8 +31,9 @@ export const useDataStore = create<DataState>((set) => ({
   author: "",
   summary: "",
   notes: "",
+  endNotes: "",
   chapterTitle: "",
-  chapterNumber: 0,
+  chapterNumber: 1,
   storyData: "",
   renderedStory: "",
   customSectionBreak: "",
@@ -39,6 +42,7 @@ export const useDataStore = create<DataState>((set) => ({
   setAuthor: (newAuthor: string) => set({ author: newAuthor }),
   setSummary: (newSummary: string) => set({ summary: newSummary }),
   setNotes: (newNotes: string) => set({ notes: newNotes }),
+  setEndNotes: (newEndNotes: string) => set({ endNotes: newEndNotes }),
   setChapterTitle: (newChapterTitle: string) =>
     set({ chapterTitle: newChapterTitle }),
   setChapterNumber: (newChapterNumber: number) =>

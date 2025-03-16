@@ -17,14 +17,23 @@
   border-inline-start: 0 none transparent;
 }
 
+#workskin .fakenews p {
+  margin: 0.5em 0;
+  font-size: 1em;
+}
+
+#workskin .fakenews :first-child {
+  margin-top: 0.5em;
+}
+
 #workskin .fakenews h5 {
   font-family: "Proxima Nova", sans-serif;
   text-decoration: none;
   font-style: normal;
   color: #2a2a2a;
   font-weight: 700;
-  font-size: 1em;
-  margin: 1.5em 0 1em;
+  font-size: 1.1em;
+  margin: 1.5em 0 0.5em;
   border: 0;
   padding: 0 0 0.5em;
 }
@@ -40,7 +49,7 @@
   color: #2a2a2a;
   font-weight: 400;
   font-size: 1em;
-  margin: 1em 0;
+  margin: 0.75em 0 0.5em;
   border: 0;
   padding: 0;
 }
@@ -62,7 +71,43 @@
 #workskin pre.fakenews {
   font-family: 'Monaco', 'Consolas', Courier, monospace;
   padding: 2.5em;
-  line-height: 1.5;
+  line-height: 1;
   white-space: pre;
   overflow-x: auto;
+  font-size: 0.8em;
 }
+
+#workskin .dateline {
+  font-family: "Proxima Nova", sans-serif;
+  margin: 1.286em auto;
+  padding: 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+#workskin .dateline h4 {
+  font-family: "Proxima Nova", sans-serif;
+  font-size: 0.857em;
+  margin: 0 0 0.3em;
+}
+
+#workskin .dateline p {
+  font-family: "Proxima Nova", sans-serif;
+  font-size: 0.75em;
+  line-height: 2;
+  margin: 0;
+}
+
+#workskin .dateline.times,
+#workskin .dateline.times h4,
+#workskin .dateline.times p {
+  font-family: Georgia, "Times New Roman", Times, "Droid Serif", serif;
+}
+
+#workskin .dateline.mono,
+#workskin .dateline.mono h4,
+#workskin .dateline.mono p {
+  font-family: 'Monaco', 'Consolas', Courier, monospace;
+  text-transform: uppercase;
+}
+

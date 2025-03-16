@@ -5,7 +5,9 @@ export const cleanHtml = (doc: Document) => {
   // wrapping a <b> tag.
   let nextHeader = 4;
   ["h1", "h2", "h3", "h4", "h5", "h6"].forEach((header) => {
-    const headerTags = doc.querySelectorAll(`${header}:not([data-shrink])`);
+    const headerTags = doc.querySelectorAll(
+      `body>${header}:not([data-shrink])`
+    );
     if (headerTags.length > 0) {
       headerTags.forEach((tag) => {
         let newTag = doc.createElement(nextHeader > 6 ? "b" : `h${nextHeader}`);
@@ -103,7 +105,7 @@ export const cleanHtml = (doc: Document) => {
     node.remove();
   }
   const allowedAttributes = ["class", "name", "title"];
-  const imgOnlyAttributes = ["alt", "height", "width"];
+  const imgOnlyAttributes = ["alt", "height", "width", "src"];
   doc.body.querySelectorAll("*").forEach((el) => {
     const attributes = el.attributes;
     const attributesToRemove = [];
@@ -112,7 +114,7 @@ export const cleanHtml = (doc: Document) => {
         if (attr.name === "href" && el.tagName === "A") {
           continue;
         }
-        if (imgOnlyAttributes.includes(attr.name) && el.tagName !== "IMG") {
+        if (imgOnlyAttributes.includes(attr.name) && el.tagName === "IMG") {
           continue;
         }
         attributesToRemove.push(attr.name);

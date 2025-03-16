@@ -2,31 +2,37 @@ export const sectionBreakStyle = (
   customSectionBreak?: string,
   customSectionBreakStyle?: string
 ) => {
+  if (!customSectionBreak) {
+    return "";
+  }
   const sectionBreakURL = customSectionBreak?.startsWith("http")
     ? customSectionBreak
     : undefined;
   const sectionBreakText = sectionBreakURL ? "" : customSectionBreak?.trim();
-  return `
-  #workskin .userstuff>hr {
-    border: 0 none;
-    text-align: center;
-    color: #2a2a2a;
-    width: 100%;
-  }
+  return `#workskin .userstuff>hr {
+  border: 0 none;
+  text-align: center;
+  color: #2a2a2a;
+  width: 100%;
+}
 
-  #workskin .userstuff>hr::after {
-      content: "${sectionBreakText}";
-      display: block;
-      margin: 0 auto;
-      ${
-        sectionBreakURL
-          ? `background-image: url(${sectionBreakURL});
-        width: 100%; height: 1.5em; background-position: center;
-        background-size: contain; background-repeat: no-repeat;`
-          : ""
-      }
-      ${customSectionBreakStyle}
-  }`;
+#workskin .userstuff>hr::after {
+  content: "${sectionBreakText}";
+  display: block;
+  margin: 0 auto;${
+    sectionBreakURL
+      ? `
+  background-image: url(${sectionBreakURL});
+    width: 100%; height: 1.5em; background-position: center;
+    background-size: contain; background-repeat: no-repeat;`
+      : ""
+  }${
+    customSectionBreakStyle
+      ? `
+  ${customSectionBreakStyle}`
+      : ""
+  }
+}`;
 };
 
 export const sanitizeStyle = (style: string) => {

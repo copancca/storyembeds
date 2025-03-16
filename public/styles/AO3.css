@@ -369,6 +369,12 @@ tbody tr th {
 
 /*END== */
 
+.fakemain {
+  font-size: 0.875em;
+  line-height: 1.286;
+  position: relative;
+}
+
 #main {
   font-size: 0.875em;
   line-height: 1.286;
@@ -645,7 +651,7 @@ div.preface .jump {
 
 /*END== */
 @media only screen and (max-width: 42em) {
-  #outer {
+  #outer, .outer {
     font-size: 0.875em;
     position: relative;
     background: #fff;

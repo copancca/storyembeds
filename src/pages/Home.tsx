@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useConfigStore } from "../store/useConfigStore";
+import React, { useState } from "react";
 import { useDataStore } from "../store/useDataStore";
 import Nav from "../components/Nav";
 import "./Home.css";
-import "../layouts/AO3.css";
 import { copyText } from "../lib/clip";
-import demoHtml from "../assets/demo.html?raw";
 import { sectionBreakStyle } from "../lib/style";
 
 const CSS_FILES: { [key: string]: string } = {
@@ -17,40 +14,9 @@ const CSS_FILES: { [key: string]: string } = {
 };
 
 const Home: React.FC = () => {
-  useEffect(() => {
-    const insta = document.createElement("link");
-    insta.rel = "stylesheet";
-    insta.href = import.meta.env.BASE_URL + "styles/InstagramDM.css";
-    document.head.appendChild(insta);
-    const iphone = document.createElement("link");
-    iphone.rel = "stylesheet";
-    iphone.href = import.meta.env.BASE_URL + "styles/IPhoneMessages.css";
-    document.head.appendChild(iphone);
-    const twitter = document.createElement("link");
-    twitter.rel = "stylesheet";
-    twitter.href = import.meta.env.BASE_URL + "styles/Twitter.css";
-    document.head.appendChild(twitter);
-    const news = document.createElement("link");
-    news.rel = "stylesheet";
-    news.href = import.meta.env.BASE_URL + "styles/News.css";
-    document.head.appendChild(news);
-    const basic = document.createElement("link");
-    basic.rel = "stylesheet";
-    basic.href = import.meta.env.BASE_URL + "styles/Basic.css";
-    document.head.appendChild(basic);
-
-    return () => {
-      document.head.removeChild(insta); // clean up on unmount
-      document.head.removeChild(iphone);
-      document.head.removeChild(twitter);
-      document.head.removeChild(news);
-      document.head.removeChild(basic);
-    };
-  }, []);
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
   const [concatenatedCSS, setConcatenatedCSS] = useState<string>("");
   const [copied, setCopied] = useState<boolean>(false);
-  const { workskin, toggleWorkSkin } = useConfigStore();
   const { customSectionBreak, customSectionBreakStyle } = useDataStore();
 
   const handleCheckboxChange = (file: string) => {
@@ -87,17 +53,30 @@ const Home: React.FC = () => {
 
   return (
     <div className="home">
+      <link
+        rel="stylesheet"
+        href={import.meta.env.BASE_URL + `styles/AO3.css`}
+      />
       <div className="sb-outer">
         <h1 className="sb-header">ao3 css/html generator</h1>
         <Nav />
         <p>
-          this tool generates embed code for social media posts. click a link
-          above to generate the html, then come here for the output css.
+          this page generates a work skin for ao3 that is useful for generating
+          fake social media embeds and other things. select the embeds you want
+          to use, then click the generate button to output the css.
         </p>
         <p>
           there's also a tool for pasting from word processors like gdocs into
           html that works with ao3. you can get it from the "doc2html" link in
-          the nav.
+          the nav. if you only use that, the only css you'll need is the basic
+          one, and you can just copy that.
+        </p>
+        <p>
+          feel free to edit the css how you like. this is just a convenience
+          tool. i definitely have a bias towards standards-compliant html so
+          you'll notice i don't ever use like <code>&lt;center&gt;</code> or
+          <code>&lt;small&gt;</code> tags (which obviously means readers who
+          disable work skins won't see those changes).
         </p>
 
         <h2 className="sb-header">embeds used</h2>
@@ -141,54 +120,6 @@ const Home: React.FC = () => {
               : "click the text box to copy the generated css"
             : "no css generated yet"}
         </p>
-        <hr />
-        <h2 className="sb-header">demo</h2>
-        <p className="workskin-status">
-          work skin is <b>{workskin ? "on" : "off"}</b>
-        </p>
-        <button onClick={() => toggleWorkSkin()}>toggle work skin</button>
-      </div>
-      <div id="outer">
-        <div id="main">
-          <div id={workskin ? "workskin" : "noworkskin"}>
-            <div className="preface group">
-              <h2 className="title heading">story title</h2>
-              <h3 className="byline heading">
-                <a href="#">author</a>
-              </h3>
-            </div>
-            <div id="chapters">
-              <div className="chapter">
-                <div className="chapter preface group">
-                  <h3 className="title">
-                    <a href="#">Chapter 1</a>: has a title
-                  </h3>
-
-                  <div id="summary" className="summary module">
-                    <h3 className="heading">Summary:</h3>
-                    <blockquote className="userstuff">
-                      <p>
-                        This is a summary for the chapter. It’s a sneak peak at
-                        what’s to come.
-                      </p>
-                    </blockquote>
-                  </div>
-
-                  <div id="notes" className="notes module">
-                    <h3 className="heading">Notes:</h3>
-                    <blockquote className="userstuff">
-                      <p>now some author notes</p>
-                    </blockquote>
-                  </div>
-                </div>
-                <div
-                  className="userstuff"
-                  dangerouslySetInnerHTML={{ __html: demoHtml }}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

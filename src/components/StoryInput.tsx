@@ -7,11 +7,11 @@ const StoryInput: React.FC = () => {
   const {
     storyData,
     setStoryData,
-    setRenderedStory,
     setTitle,
     setAuthor,
     setSummary,
     setNotes,
+    setEndNotes,
     setChapterNumber,
     setChapterTitle,
     setCustomSectionBreak,
@@ -20,12 +20,12 @@ const StoryInput: React.FC = () => {
     author,
     summary,
     notes,
+    endNotes,
     chapterNumber,
     chapterTitle,
     customSectionBreak,
     customSectionBreakStyle,
   } = useDataStore();
-  const [error, setError] = useState<string | null>(null);
   const [isMetadataOpen, setIsMetadataOpen] = useState(false);
   const [isCustomizationOpen, setIsCustomizationOpen] = useState(true);
 
@@ -67,44 +67,40 @@ const StoryInput: React.FC = () => {
     setStoryData(e.target.value);
   };
 
-  const saveConfig = () => {
-    try {
-      setRenderedStory(storyData);
-      setError(null);
-    } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else if (typeof err === "string") {
-        setError(err);
-      } else {
-        setError("An error occurred.");
-      }
-    }
-  };
-
   return (
-    <div>
+    <div className="story-input">
       <h2 className="sb-header">paste from word processor</h2>
       <div>
-        {error && <p style={{ color: "red" }}>{error}</p>}
         <textarea
           placeholder="paste from a word processor (e.g. google docs)"
           value={storyData}
           onChange={handleInputChange}
           onPaste={(e) => handlePaste(e, setStoryData)}
         />
-        <button onClick={saveConfig}>show rendered html</button>
       </div>
       <h3 className="sb-header">instructions</h3>
       <p>
         paste from a word processor (e.g. google docs) and the contents of the
-        text box will be html ready to be added to a work. click the button to
-        preview the html it generates. you'll still have to replace any embeds
-        from the other pages with that output.
+        text box will be html ready to be added to a work. the html will appear
+        below. it does live update as you type, but this is <i>really</i> not
+        meant to be a word processor or anything. this code is the furthest
+        thing from optimized and <b>there is no way to save</b> so uh... just
+        use this as a quick way to get your formatted text and save it to a
+        work.
       </p>
       <p>
-        tested on google docs, word online, and word 15 (the version that comes
-        with office 365).
+        tested (being very generous) on google docs, word online, and word 15
+        (the version that comes with office 365).
+      </p>
+      <p>
+        find a bug? report it{" "}
+        <a
+          href="https://github.com/copancca/storyembeds/issues"
+          target="_blank"
+        >
+          here
+        </a>
+        . no promises on when or if it'll be fixed.
       </p>
       <div className="collapsible-section">
         <button
@@ -169,14 +165,14 @@ const StoryInput: React.FC = () => {
         >
           {isMetadataOpen ? "▼" : "▶"} story metadata
         </button>
-
         {isMetadataOpen && (
           <div className="collapsible-fields">
             <p className="field-group-description">
-              these are all purely cosmetic so the render below will look more
-              like the actual published story. summary and notes both get
-              converted to html so you can paste in from a doc to generate html
-              to use.
+              these are all just so the preview below looks like the published
+              story. summary and notes both get converted to html so you can
+              paste in rich text from a doc. in the demo they appear where
+              chapter notes/summary would appear, but the story level notes
+              section has the same formatting.
             </p>
             <div className="field-group">
               <label htmlFor="title">title:</label>
@@ -185,7 +181,7 @@ const StoryInput: React.FC = () => {
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Story title"
+                placeholder="story title"
               />
             </div>
 
@@ -196,7 +192,7 @@ const StoryInput: React.FC = () => {
                 type="text"
                 value={author}
                 onChange={(e) => setAuthor(e.target.value)}
-                placeholder="Author name"
+                placeholder="author name"
               />
             </div>
 
@@ -208,7 +204,7 @@ const StoryInput: React.FC = () => {
                 value={chapterNumber}
                 onChange={(e) => setChapterNumber(parseInt(e.target.value))}
                 min={1}
-                placeholder="Chapter number"
+                placeholder="chapter number"
               />
             </div>
 
@@ -219,7 +215,7 @@ const StoryInput: React.FC = () => {
                 type="text"
                 value={chapterTitle}
                 onChange={(e) => setChapterTitle(e.target.value)}
-                placeholder="Chapter title"
+                placeholder="chapter title"
               />
             </div>
 
@@ -230,7 +226,7 @@ const StoryInput: React.FC = () => {
                 value={summary}
                 onPaste={(e) => handlePaste(e, setSummary)}
                 onChange={(e) => setSummary(e.target.value)}
-                placeholder="Story summary"
+                placeholder="story summary"
               />
             </div>
 
@@ -241,7 +237,18 @@ const StoryInput: React.FC = () => {
                 value={notes}
                 onPaste={(e) => handlePaste(e, setNotes)}
                 onChange={(e) => setNotes(e.target.value)}
-                placeholder="Author notes"
+                placeholder="author notes"
+              />
+            </div>
+
+            <div className="field-group">
+              <label htmlFor="endnotes">end notes:</label>
+              <textarea
+                id="endnotes"
+                value={endNotes}
+                onPaste={(e) => handlePaste(e, setEndNotes)}
+                onChange={(e) => setEndNotes(e.target.value)}
+                placeholder="end notes"
               />
             </div>
           </div>

@@ -150,42 +150,55 @@ export const parse = (
   // in other words, insert a newline after each </p>, </h1>, </h2>, etc.
   const html = doc.body.innerHTML;
   const wrappedHtml = html
-    .replace(/<\/p>/g, "</p>\n")
-    .replace(/<br>/g, "<br>\n")
-    .replace(/<hr>/g, "<hr>\n")
-    .replace(/<\/div>/g, "</div>\n")
-    .replace(/<\/pre>/g, "</pre>\n")
-    .replace(/<\/table>/g, "</table>\n")
-    .replace(/<\/tr>/g, "</tr>\n")
-    .replace(/<\/ul>/g, "</ul>\n")
-    .replace(/<\/ol>/g, "</ol>\n")
-    .replace(/<\/li>/g, "</li>\n")
-    .replace(/<\/h([1-6])>/g, "</h$1>\n");
+    .replace(/<\/p>[^\n]/g, "</p>\n")
+    .replace(/<br>[^\n]/g, "<br>\n")
+    .replace(/<hr>[^\n]/g, "<hr>\n")
+    .replace(/<\/div>[^\n]/g, "</div>\n")
+    .replace(/<\/pre>[^\n]/g, "</pre>\n")
+    .replace(/<\/table>[^\n]/g, "</table>\n")
+    .replace(/<\/tr>[^\n]/g, "</tr>\n")
+    .replace(/<\/ul>[^\n]/g, "</ul>\n")
+    .replace(/<\/ol>[^\n]/g, "</ol>\n")
+    .replace(/<\/li>[^\n]/g, "</li>\n")
+    .replace(/<\/h([1-6])>[^\n]/g, "</h$1>\n");
   // if any block elements are longer than 250 characters, wrap them at 250
   // characters, taking care not to break words.
   const lines = wrappedHtml.split("\n");
-  const wrappedLines = lines
-    .map((line) => {
-      if (line.length <= 250) return line;
-
-      const words = line.split(" ");
-      const wrappedParts = [];
-      let currentLine = "";
-
-      for (const word of words) {
-        if (currentLine.length + word.length + 1 <= 250) {
-          currentLine += (currentLine ? " " : "") + word;
-        } else {
-          wrappedParts.push(currentLine);
-          currentLine = word;
-        }
+  let inPre = false;
+  const wrappedLines = lines.map((line) => {
+    if (line.includes("<pre ") || line.includes("<pre>")) {
+      inPre = true;
+    }
+    if (inPre) {
+      if (line.includes("</pre>")) {
+        inPre = false;
       }
-      if (currentLine) {
+      return line;
+    }
+    if (line.length <= 250) {
+      if (line.length === 0 && inPre) {
+        return " ";
+      }
+      return line;
+    }
+
+    const words = line.split(" ");
+    const wrappedParts = [];
+    let currentLine = "";
+
+    for (const word of words) {
+      if (currentLine.length + word.length + 1 <= 250) {
+        currentLine += (currentLine ? " " : "") + word;
+      } else {
         wrappedParts.push(currentLine);
+        currentLine = word;
       }
-      return wrappedParts.join("\n");
-    })
-    .filter((line) => line.length > 0);
+    }
+    if (currentLine) {
+      wrappedParts.push(currentLine);
+    }
+    return wrappedParts.join("\n");
+  });
 
   return wrappedLines.join("\n");
 };
