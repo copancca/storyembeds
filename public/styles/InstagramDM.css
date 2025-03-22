@@ -121,52 +121,24 @@
   top: 4px;
 }
 
-#workskin .insta .video {
+#workskin .insta .callicon {
+  width: 21px;
+  height: 21px;
   float: right;
-  margin-top: 22px;
-  margin-right: 27px;
   position: relative;
+  top: 16px;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
-#workskin .insta .video .cambod {
-  width: 13px;
-  height: 13px;
-  border-radius: 5px;
-  background-color: #fff;
-  border: 2px solid #333;
-  position: relative;
-  top: -4px;
-  z-index: 10;
+#workskin .insta .video {
+  right: 23px;
+  background-image: url(https://copancca.github.io/storyembeds/images/inst-vc.png);
 }
 
-#workskin .insta .video .camlens {
-  position: absolute;
-  width: 11px;
-  height: 7px;
-  border-left: 1px solid transparent;
-  border-bottom: 2px solid #333;
-}
-
-#workskin .insta .video .camlens,
-#workskin .insta .video .camlens::before {
-  display: block;
-  box-sizing: border-box;
-  border-right: 2px solid transparent;
-  transform: rotate(-90deg);
-  top: 1px;
-  right: -6px;
-}
-
-#workskin .insta .video .camlens::before {
-  content: "";
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-left: 2px solid #333;
-  border-top: 2px solid #333;
-  border-bottom: 2px solid transparent;
-  transform: rotate(45deg) skew(10deg, 10deg);
-  left: 0px;
+#workskin .insta .audio {
+  right: 39px;
+  background-image: url(https://copancca.github.io/storyembeds/images/inst-ac.png);
 }
 
 #workskin .insta .body {
@@ -180,19 +152,6 @@
 
 #workskin .insta .body .clear {
   clear: both;
-}
-
-#workskin .insta .desc {
-  display: inline-block;
-  height: 0;
-  width: 0;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 0;
-  overflow: hidden;
-  color: transparent;
-  position: absolute;
 }
 
 #workskin .insta p {

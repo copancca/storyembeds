@@ -61,17 +61,12 @@ const StoryText: React.FC = () => {
     news.rel = "stylesheet";
     news.href = import.meta.env.BASE_URL + "styles/News.css";
     document.head.appendChild(news);
-    const basic = document.createElement("link");
-    basic.rel = "stylesheet";
-    basic.href = import.meta.env.BASE_URL + "styles/Basic.css";
-    document.head.appendChild(basic);
 
     return () => {
       document.head.removeChild(insta); // clean up on unmount
       document.head.removeChild(iphone);
       document.head.removeChild(twitter);
       document.head.removeChild(news);
-      document.head.removeChild(basic);
     };
   }, []);
   const [isHintBoxOpen, setIsHintBoxOpen] = useState(false);
@@ -159,6 +154,9 @@ const StoryText: React.FC = () => {
     import.meta.env.BASE_URL
   }styles/IPhoneMessages.css">
   <link rel="stylesheet" href="${import.meta.env.BASE_URL}styles/Twitter.css">
+  <link rel="stylesheet" href="${
+    import.meta.env.BASE_URL
+  }styles/GoogleMessages.css">
   <link rel="stylesheet" href="${import.meta.env.BASE_URL}styles/News.css">
   <link rel="stylesheet" href="${import.meta.env.BASE_URL}styles/Basic.css">
   <link rel="stylesheet" href="${import.meta.env.BASE_URL}styles/AO3.css">
@@ -177,6 +175,10 @@ ${tags.map((tag) => tag[0]).join("")}${content}${tags
       <link
         rel="stylesheet"
         href={import.meta.env.BASE_URL + `styles/AO3.css`}
+      />
+      <link
+        rel="stylesheet"
+        href={import.meta.env.BASE_URL + `styles/Basic.css`}
       />
       <div className="sb-outer">
         <h1 className="sb-header">doc to html</h1>

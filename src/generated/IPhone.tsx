@@ -1,12 +1,13 @@
 import React from "react";
 import {
+  emojiOnly,
   formatText,
   formatFirstLetter,
   formatIOSReadTimestamp,
   formatIOSTimestamp,
   longSince,
 } from "../lib/formatters";
-import { Contact, MessageBlock } from "../types/IPhone";
+import { Contact, MessageBlock } from "../types/Phone";
 
 interface PhoneProps {
   phone: MessageBlock;
@@ -81,11 +82,6 @@ export const PhoneMessages: React.FC<PhoneProps> = ({
       <div className={phone.supportsIMessage === false ? "body green" : "body"}>
         {phone.messages.map((msg, i) => {
           const readAt = formatIOSReadTimestamp(now, msg.read);
-          const emojiOnly = msg.text
-            .trim()
-            .match(
-              /^[\p{Emoji}\p{Emoji_Component}\p{Emoji_Modifier}\p{Emoji_Modifier_Base}\p{Emoji_Presentation}]+$/u
-            );
           return (
             <React.Fragment key={i}>
               {(i > 0 && longSince(msg, phone.messages[i - 1])) ||
@@ -94,15 +90,15 @@ export const PhoneMessages: React.FC<PhoneProps> = ({
               ) : null}
               <p
                 className={
-                  (msg.me ? "me" : "you") + (emojiOnly ? " emoji" : "")
+                  (msg.me ? "me" : "you") +
+                  (emojiOnly(msg.text) ? " emoji" : "")
                 }
               >
                 <span className="desc">{msg.me ? owner || "Me" : name}: </span>
                 {formatText(msg.text)}
                 {msg.tapback ? (
                   <span className="tapback">
-                    {" "}
-                    <span className="desc">Tapback:</span>
+                    <span className="desc"> · Tapback:</span>
                     {msg.tapback}
                   </span>
                 ) : null}

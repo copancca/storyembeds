@@ -218,19 +218,6 @@
   z-index: 1;
 }
 
-#workskin .phone .desc {
-  display: inline-block;
-  height: 0;
-  width: 0;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 0;
-  overflow: hidden;
-  color: transparent;
-  position: absolute;
-}
-
 #workskin .phone .body p .tapback::before {
   content: "";
   display: block;
@@ -319,6 +306,10 @@
   padding: 0.5em 0.4em 0;
   font-size: 0.75em;
   font-weight: 600;
+}
+
+#workskin .phone .body p.timestamp .ts-date {
+  font-weight: 700;
 }
 
 #workskin .phone .body p.timestamp:first-child {

@@ -6,7 +6,7 @@ import { copyThreadHTML } from "../lib/clip";
 import { newDateOrThrow, newOptionalDate } from "../lib/parsers";
 import { useConfigStore } from "../store/useConfigStore";
 import { PhoneMessages } from "../generated/IPhone";
-import { Contact, IPhoneData, Message, MessageBlock } from "../types/IPhone";
+import { Contact, PhoneData, Message, MessageBlock } from "../types/Phone";
 
 const example = `{
   "now": "2023-10-01T13:05:00Z",
@@ -85,7 +85,7 @@ const example = `{
   ]
 }`;
 
-function parser(rawConfig: string): IPhoneData {
+function parser(rawConfig: string): PhoneData {
   const data = JSON.parse(rawConfig);
   if (!data || typeof data !== "object") {
     throw new Error("invalid thread json");
@@ -237,19 +237,19 @@ const instruction = (
 );
 
 const renderPhones = (): React.ReactNode => {
-  const { iphoneData, setOutput } = useConfigStore();
-  if (!iphoneData) {
+  const { phoneData, setOutput } = useConfigStore();
+  if (!phoneData) {
     return null;
   }
-  return iphoneData?.messageBlocks.map((mb, i) => {
-    const contact = mb.name ? iphoneData.contacts[mb.name] : undefined;
+  return phoneData?.messageBlocks.map((mb, i) => {
+    const contact = mb.name ? phoneData.contacts[mb.name] : undefined;
     return (
       <React.Fragment key={i}>
         <h3>message block {i + 1}</h3>
         <div className="block-content userstuff" id={`thread-block-${i}`}>
           <PhoneMessages
-            owner={iphoneData.owner}
-            now={iphoneData.now}
+            owner={phoneData.owner}
+            now={phoneData.now}
             contact={contact}
             phone={mb}
           />
@@ -267,7 +267,7 @@ const renderPhones = (): React.ReactNode => {
 };
 
 const IPhoneMessages: React.FC = () => {
-  const { setIphoneData } = useConfigStore();
+  const { setPhoneData } = useConfigStore();
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "stylesheet";
@@ -288,7 +288,7 @@ const IPhoneMessages: React.FC = () => {
           instructions={instruction}
           parser={(rawConfig: string) => {
             const parsed = parser(rawConfig);
-            setIphoneData(parsed);
+            setPhoneData(parsed);
           }}
         />
       }

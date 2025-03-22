@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  emojiOnly,
   formatText,
   formatInstagramTimestamp,
   longSince,
@@ -46,18 +47,11 @@ export const PhoneDMs: React.FC<PhoneProps> = ({
             {account.name}
           </h5>
         </div>
-        <div className="video">
-          <div className="cambod" />
-          <div className="camlens" />
-        </div>
+        <div className="video callicon" />
+        <div className="audio callicon" />
       </div>
       <div className="body">
         {phone.messages.map((msg, i) => {
-          const emojiOnly = msg.text
-            .trim()
-            .match(
-              /^(?:\p{Emoji}(?:\p{Emoji_Modifier}|️|\uFE0F|\u200D[\p{Emoji}])+|\p{Emoji_Presentation}|\p{Extended_Pictographic})+$/u
-            );
           const showTimestamp =
             msg.sent && (i === 0 || longSince(msg, phone.messages[i - 1]));
           return (
@@ -70,7 +64,7 @@ export const PhoneDMs: React.FC<PhoneProps> = ({
               <p
                 className={
                   (msg.me ? "me" : "you") +
-                  (emojiOnly ? " emoji" : "") +
+                  (emojiOnly(msg.text) ? " emoji" : "") +
                   (msg.tapback ? " tapped" : "")
                 }
               >
@@ -80,8 +74,7 @@ export const PhoneDMs: React.FC<PhoneProps> = ({
                 {formatText(msg.text)}
                 {msg.tapback ? (
                   <span className="tapback">
-                    {" "}
-                    <span className="desc">Tapback:</span> {msg.tapback}
+                    <span className="desc"> · Tapback:</span> {msg.tapback}
                   </span>
                 ) : null}
                 {!msg.me &&

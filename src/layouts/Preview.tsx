@@ -15,6 +15,10 @@ const PreviewLayout: React.FC<PreviewLayoutProps> = ({ controls, viewer }) => {
         rel="stylesheet"
         href={import.meta.env.BASE_URL + `styles/AO3.css`}
       />
+      <link
+        rel="stylesheet"
+        href={import.meta.env.BASE_URL + `styles/Basic.css`}
+      />
       <main className="controls">{controls}</main>
       <aside className="preview">
         <div id={workskin ? "workskin" : "noworkskin"}>{viewer}</div>

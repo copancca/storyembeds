@@ -1,4 +1,4 @@
-export interface IPhoneData {
+export interface PhoneData {
   now?: Date;
   owner?: string;
   contacts: Record<string, Contact>;

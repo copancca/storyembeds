@@ -18,3 +18,16 @@
 #workskin .text-big {
   font-size: 1.14em;
 }
+
+#workskin .desc {
+  display: inline-block;
+  height: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 0;
+  overflow: hidden;
+  color: transparent;
+  position: absolute;
+}
