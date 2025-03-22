@@ -1,0 +1,276 @@
+#workskin .googlem {
+  width: 375px;
+  margin: 0 auto 2em;
+  font-size: 0.703em;
+  font-family: "Google Sans", "Roboto", Helvetica Neue, sans-serif;
+  line-height: 1.42;
+  letter-spacing: 0.015em;
+  border: 1px solid #ccc;
+}
+
+#workskin .googlem .header {
+  background-color: #efedf5;
+  height: 70px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+#workskin .googlem .header .back {
+  background-image: url(https://copancca.github.io/storyembeds/images/gm-back.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 34px 0 0 13px;
+  box-sizing: border-box;
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+#workskin .googlem .header .profile {
+  margin: 30px 0 0 16px;
+}
+
+#workskin .googlem .pfp {
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 auto 4px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 0;
+  text-align: center;
+}
+
+#workskin .googlem .pfp:has(>.nopfp) {
+  border: 8px solid;
+}
+
+#workskin .googlem .pfp span {
+  font-family: "Google Sans Display", "Roboto", Helvetica Neue, sans-serif;
+  font-size: 20px;
+  line-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#workskin .googlem .pfp .nopfp {
+  display: block;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  background-color: #fff;
+  position: absolute;
+  bottom: -12px;
+  left: -2px;
+}
+
+#workskin .googlem .pfp .nopfp::after {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #fff;
+  position: absolute;
+  bottom: 23px;
+  left: 8px;
+}
+
+#workskin .googlem .co0 .pfp {
+  background-color: #1a73e8;
+  border-color: #1a73e8;
+}
+
+#workskin .googlem .co1 .pfp {
+  background-color: #4ecde6;
+  border-color: #4ecde6;
+}
+
+#workskin .googlem .co2 .pfp {
+  background-color: #5bb974;
+  border-color: #5bb974;
+}
+
+#workskin .googlem .co3 .pfp {
+  background-color: #fa903e;
+  border-color: #fa903e;
+}
+
+#workskin .googlem .co4 .pfp {
+  background-color: #af5cf7;
+  border-color: #af5cf7;
+}
+
+#workskin .googlem .co5 .pfp {
+  background-color: #ee675c;
+  border-color: #ee675c;
+}
+
+#workskin .googlem .co6 .pfp {
+  background-color: #fcc934;
+  border-color: #fcc934;
+}
+
+#workskin .googlem .header .profile .pfp img {
+  width: 30px;
+  height: 30px;
+}
+
+#workskin .googlem .header .callicon {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin: 34px 3px 0;
+}
+
+#workskin .googlem .header .callicon>div {
+  margin: 0 10px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+}
+
+#workskin .googlem .header .callicon .audio {
+  background-image: url(https://copancca.github.io/storyembeds/images/gm-call.png);
+}
+
+#workskin .googlem .header .callicon .menumore {
+  background-image: url(https://copancca.github.io/storyembeds/images/gm-more.png);
+}
+
+#workskin .googlem .body {
+  background: #fbf8ff;
+  padding: 0 0 1em;
+}
+
+#workskin .googlem .body>:first-child,
+#workskin .googlem .body>:first-child>p {
+  padding-top: 6px;
+}
+
+#workskin .googlem .header .profile .name {
+  font-size: 1.425em;
+  font-weight: 400;
+  padding: 0;
+  color: #1c1b20;
+  text-align: center;
+  position: relative;
+  box-sizing: border-box;
+  font-family: "Google Sans Display", "Roboto", Helvetica Neue, sans-serif;
+  display: inline-block;
+  margin: 0 10px 4px;
+  top: -15px;
+}
+
+#workskin .googlem .msg-row {
+  display: flex;
+  width: 100%;
+}
+
+#workskin .googlem .msg-row.me {
+  justify-content: flex-end;
+}
+
+#workskin .googlem .msg-row.you {
+  justify-content: flex-start;
+}
+
+#workskin .googlem .msg-row p {
+  font-family: "Google Sans Text", Roboto, arial, sans-serif;
+  margin: 1em 6px 0;
+  font-weight: 400;
+  font-size: 1.26em;
+  padding: 0.6em 1em;
+  border-radius: 1.25em;
+  width: max-content;
+  max-width: 80%;
+  position: relative;
+  clear: both;
+  box-sizing: border-box;
+  color: #1c1b20;
+}
+
+#workskin .googlem .msg-row.me p {
+  background-color: #e4dff9;
+}
+
+#workskin .googlem .msg-row.you p {
+  background-color: #f3eff7;
+}
+
+#workskin .googlem .msg-row.emoji p {
+  font-size: 3em;
+  background-color: transparent;
+  background-image: none;
+  margin-top: 0;
+  padding: 0.15em 0.35em;
+}
+
+#workskin .googlem .msg-row.emoji p::after {
+  border: 0 none !important;
+}
+
+#workskin .googlem .tapped p {
+  margin-bottom: 1em;
+}
+
+#workskin .googlem .emoji.tapped p {
+  margin-bottom: 0;
+}
+
+#workskin .googlem .msg-row p .tapback {
+  display: block;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -1em;
+  background-color: #fff;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  padding-top: 3px;
+  font-size: 11px;
+  right: 0.35em;
+}
+
+#workskin .googlem p.timestamp {
+  font-family: "Google Sans Text", Roboto, arial, sans-serif;
+  text-align: center;
+  color: #54535c;
+  margin: 0 1em 0;
+  padding: 1em 0 0 0;
+  font-size: 1em;
+}
+
+#workskin .googlem p.timestamp+p {
+  margin-top: 0.6em;
+}
+
+#workskin .googlem .me:not(.tapped):not(.emoji)+.me p {
+  border-top-right-radius: 0.25em;
+  margin-top: 2px;
+}
+
+#workskin .googlem .you:not(.tapped):not(.emoji)+.you p {
+  border-top-left-radius: 0.25em;
+  margin-top: 2px;
+}
+
+#workskin .googlem .me:not(.tapped):has(+.me:not(.emoji)) p {
+  border-bottom-right-radius: 0.25em;
+}
+
+#workskin .googlem .you:not(.tapped):has(+.you:not(.emoji)) p {
+  border-bottom-left-radius: 0.25em;
+}
