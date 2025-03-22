@@ -20,10 +20,17 @@ const Nav: React.FC = () => {
       </NavLink>{" "}
       |{" "}
       <NavLink
+        to="/google"
+        className={({ isActive }) => (isActive ? "active" : "")}
+      >
+        android
+      </NavLink>{" "}
+      |{" "}
+      <NavLink
         to="/iphone"
         className={({ isActive }) => (isActive ? "active" : "")}
       >
-        iphone messages
+        iphone
       </NavLink>{" "}
       |{" "}
       <NavLink
