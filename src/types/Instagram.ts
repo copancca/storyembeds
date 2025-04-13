@@ -12,6 +12,7 @@ export interface InstaAccount {
 
 export interface MessageBlock {
   account: string;
+  header: boolean;
   now?: Date;
   messages: Message[];
 }

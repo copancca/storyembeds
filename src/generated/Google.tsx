@@ -97,34 +97,38 @@ export const PhoneMessages: React.FC<PhoneProps> = ({
   const name = contact?.name || phone.phoneNumber;
   return (
     <div className="googlem">
-      <div className={`header co${hash(displayName) % 7}`}>
-        <div className="back" />
-        <div className="profile">
-          <p className="pfp">
-            {contact?.pfp ? (
-              <img
-                className="pfp"
-                src={contact.pfp}
-                alt="profile image"
-                width="48"
-                height="48"
-              />
-            ) : contact && formatFirstLetter(contact.displayName) ? (
-              <span>{formatFirstLetter(contact.displayName)}</span>
-            ) : (
-              <span className="nopfp" />
-            )}
-          </p>
-          <h5 className="name">
-            <span className="desc">Google Messages from </span>
-            {displayName}
-          </h5>
+      {phone.header ? (
+        <div className={`header co${hash(displayName) % 7}`}>
+          <div className="back" />
+          <div className="profile">
+            <p className="pfp">
+              {contact?.pfp ? (
+                <img
+                  className="pfp"
+                  src={contact.pfp}
+                  alt="profile image"
+                  width="48"
+                  height="48"
+                />
+              ) : contact && formatFirstLetter(contact.displayName) ? (
+                <span>{formatFirstLetter(contact.displayName)}</span>
+              ) : (
+                <span className="nopfp" />
+              )}
+            </p>
+            <h5 className="name">
+              <span className="desc">Google Messages from </span>
+              {displayName}
+            </h5>
+          </div>
+          <div className="callicon">
+            <div className="audio" />
+            <div className="menumore" />
+          </div>
         </div>
-        <div className="callicon">
-          <div className="audio" />
-          <div className="menumore" />
-        </div>
-      </div>
+      ) : (
+        <h5 className="desc">Google Messages from {displayName}</h5>
+      )}
       <div className={`body co${hash(displayName) % 7}`}>
         {phone.messages.map((msg, i) => {
           const showTimestamp =

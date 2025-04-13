@@ -142,6 +142,7 @@ function parser(rawConfig: string): InstaData {
       }
       return {
         account,
+        header: mb.header !== false,
         now: mb.now ? newDateOrThrow(mb.now) : undefined,
         messages: mb.messages.map((m: any): Message => {
           if (typeof m !== "object") {
@@ -180,7 +181,7 @@ const instruction = (
       <code>accounts</code> and <code>messageblocks</code>.
     </p>
     <p>
-      in additionto the two required properties, you can also set{" "}
+      in addition to the two required properties, you can also set{" "}
       <code>now</code> and <code>owneraccount</code>. <code>now</code> is the
       current time, which is used to format timestamps if they're set on
       messages. <code>owneraccount</code> is the name of the account that owns
@@ -189,14 +190,16 @@ const instruction = (
       "Me".
     </p>
     <p>
-      accounts is a list of Instagram accounts, each with a <code>name</code>{" "}
-      and an optional <code>pfp</code> profile picture. if you don't set a pfp,
-      the profile picture will be a placeholder.
+      <code>accounts</code> is a list of Instagram accounts, each with a{" "}
+      <code>name</code> and an optional <code>pfp</code> profile picture. if you
+      don't set a pfp, the profile picture will be a placeholder.
     </p>
     <p>
-      messageblocks is a list of message blocks, each of which must have an{" "}
-      <code>account</code> which is the name of the account that the messages
-      are from. each message block generates its own html to be copied.
+      <code>messageblocks</code> is a list of message blocks, each of which must
+      have an <code>account</code> which is the name of the account that the
+      messages are from. each message block generates its own html to be copied.
+      you can optionally set <code>header</code> to <code>false</code> to hide
+      the phone header (and show only the messages).
     </p>
     <p>
       a message block will also have a list of <code>messages</code>. each

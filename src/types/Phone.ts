@@ -9,6 +9,7 @@ export interface MessageBlock {
   name?: string;
   contact?: Contact;
   phoneNumber?: string;
+  header: boolean;
   now?: Date;
   supportsIMessage?: boolean;
   showStatus?: boolean;

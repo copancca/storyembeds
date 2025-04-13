@@ -25,31 +25,35 @@ export const PhoneDMs: React.FC<PhoneProps> = ({
   return (
     <div className="insta">
       <div className="sendbox" />
-      <div className="header">
-        <div className="back" />
-        <div className="profile">
-          <p className="pfp">
-            {account.pfp ? (
-              <img
-                height="48"
-                width="48"
-                src={account.pfp}
-                alt="profile image"
-              />
-            ) : (
-              <span className="nopfpborder">
-                <span className="nopfp" />
-              </span>
-            )}
-          </p>
-          <h5 className="name">
-            <span className="desc">Instagram DMs from </span>
-            {account.name}
-          </h5>
+      {phone.header ? (
+        <div className="header">
+          <div className="back" />
+          <div className="profile">
+            <p className="pfp">
+              {account.pfp ? (
+                <img
+                  height="48"
+                  width="48"
+                  src={account.pfp}
+                  alt="profile image"
+                />
+              ) : (
+                <span className="nopfpborder">
+                  <span className="nopfp" />
+                </span>
+              )}
+            </p>
+            <h5 className="name">
+              <span className="desc">Instagram DMs from </span>
+              {account.name}
+            </h5>
+          </div>
+          <div className="video callicon" />
+          <div className="audio callicon" />
         </div>
-        <div className="video callicon" />
-        <div className="audio callicon" />
-      </div>
+      ) : (
+        <h5 className="desc">Instagram DMs from {account.name}</h5>
+      )}
       <div className="body">
         {phone.messages.map((msg, i) => {
           const showTimestamp =

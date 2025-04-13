@@ -48,37 +48,40 @@ export const PhoneMessages: React.FC<PhoneProps> = ({
   const name = contact?.name || phone.phoneNumber;
   return (
     <div className="phone">
-      <div className="sendbox" />
-      <div className="header">
-        <div className="back" />
-        {phone.supportsIMessage ? (
-          <div className="facetime">
-            <div className="cambod" />
-            <div className="camlens" />
+      {phone.header ? (
+        <div className="header">
+          <div className="back" />
+          {phone.supportsIMessage ? (
+            <div className="facetime">
+              <div className="cambod" />
+              <div className="camlens" />
+            </div>
+          ) : null}
+          <div className="profile">
+            <p className="pfp">
+              {contact?.pfp ? (
+                <img
+                  className="pfp"
+                  src={contact.pfp}
+                  alt="profile image"
+                  width="48"
+                  height="48"
+                />
+              ) : contact && formatFirstLetter(contact.displayName) ? (
+                <span>{formatFirstLetter(contact.displayName)}</span>
+              ) : (
+                <span className="nopfp" />
+              )}
+            </p>
+            <h5 className="name">
+              <span className="desc">iPhone messages from </span>
+              {displayName}
+            </h5>
           </div>
-        ) : null}
-        <div className="profile">
-          <p className="pfp">
-            {contact?.pfp ? (
-              <img
-                className="pfp"
-                src={contact.pfp}
-                alt="profile image"
-                width="48"
-                height="48"
-              />
-            ) : contact && formatFirstLetter(contact.displayName) ? (
-              <span>{formatFirstLetter(contact.displayName)}</span>
-            ) : (
-              <span className="nopfp" />
-            )}
-          </p>
-          <h5 className="name">
-            <span className="desc">iPhone messages from </span>
-            {displayName}
-          </h5>
         </div>
-      </div>
+      ) : (
+        <h5 className="desc">iPhone messages from {displayName}</h5>
+      )}
       <div className={phone.supportsIMessage === false ? "body green" : "body"}>
         {phone.messages.map((msg, i) => {
           const readAt = formatIOSReadTimestamp(now, msg.read);

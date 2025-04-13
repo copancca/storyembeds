@@ -156,6 +156,7 @@ function parser(rawConfig: string): PhoneData {
       }
       return {
         name,
+        header: mb.header !== false,
         now: mb.now ? newDateOrThrow(mb.now) : undefined,
         phoneNumber: phonenumber,
         showStatus: mb.showstatus,
@@ -214,7 +215,9 @@ const instruction = (
     <p>
       messageblocks is a list of message blocks, each of which must have a{" "}
       <code>name</code> which is the name field of the contact that the messages
-      are from. each message block generates its own html to be copied.
+      are from. each message block generates its own html to be copied. you can
+      optionally set <code>header</code> to <code>false</code> to hide the phone
+      header (and show only the messages).
     </p>
     <p>
       a message block will also have a list of <code>messages</code>. each
